@@ -46,8 +46,7 @@ Description: generates external links section.
 
 """
 def generateExtraInfo(ngc_num, webpage):
-	text = "==External links==\n*[" + webpage + " NGC " + ngc_num +
-		   " on SIMBAD" + "]\n"
+	text = "==External links==\n*[" + webpage + " NGC " + ngc_num + " on SIMBAD" + "]\n"
 
 	return text + "[[Category:NGC objects|" + ngc_num + "]]"
 
@@ -223,26 +222,15 @@ def transformToWikiBox(ngc_num, epoch, coordinates, redShift,
 	text = text + "| name = [[New General Catalogue|NGC]] " + ngc_num + "\n"
 	text = text + "| image = \n"
 	text = text + "| caption = \n"
-	text = text + "| epoch = [[" + epoch +
-	        "]]\n <ref name=\"simbad\">{{cite web|title=SIMBAD Astronomical" +
-            "Database - CDS (Strasbourg)|work=Results for NGC " + 
-            ngc_num + "|url=" + webpage + "}}</ref>\n"
-	text = text + "| ra = {{RA|" + coordinates[0] + "|" + coordinates[1] +
-            "|" + coordinates[2] + "}} <ref name=\"simbad\" />\n"
-	text = text + "| dec = {{DEC|" + coordinates[3] + "|" + coordinates[4] +
-            "|" + coordinates[5] + "}} <ref name=\"simbad\" />\n"
+	text = text + "| epoch = [[" + epoch + "]]\n <ref name=\"simbad\">{{cite web|title=SIMBAD Astronomical" + "Database - CDS (Strasbourg)|work=Results for NGC " + ngc_num + "|url=" + webpage + "}}</ref>\n"
+	text = text + "| ra = {{RA|" + coordinates[0] + "|" + coordinates[1] + "|" + coordinates[2] + "}} <ref name=\"simbad\" />\n"
+	text = text + "| dec = {{DEC|" + coordinates[3] + "|" + coordinates[4] + "|" + coordinates[5] + "}} <ref name=\"simbad\" />\n"
 	text = text + "| constellation name = \n"
-	text = (text + "| z = " + redShift + 
-            " <ref name=\"simbad\" />\n") if (redShift != "") else text +
-            "| z = \n"																
-	text = (text + "| h_radial_v = {{nowrap|" + helioRadialVelocity +
-            "[[Metre per second|km/s]]}} <ref name=\"simbad\" />\n")
-            if (helioRadialVelocity != "") else text + "| h_radial_v = \n" 
+	text = (text + "| z = " + redShift + " <ref name=\"simbad\" />\n") if (redShift != "") else text + "| z = \n"																
+	text = (text + "| h_radial_v = {{nowrap|" + helioRadialVelocity + "[[Metre per second|km/s]]}} <ref name=\"simbad\" />\n") if (helioRadialVelocity != "") else text + "| h_radial_v = \n" 
 	text = text + "| gal_v = \n"																			
 	text = text + "| dist_ly = \n"
-	text = (text + "| type = " + morphType +
-            "<ref name=\"simbad\" />\n") if (morphType != "") else text +
-            "| type = \n"
+	text = (text + "| type = " + morphType + "<ref name=\"simbad\" />\n") if (morphType != "") else text + "| type = \n"
 	text = text + "| size_v = \n"
 	text = text + "| appmag_b = " + b + "<ref name=\"simbad\" />\n"
 	text = text + "| notes = \n"

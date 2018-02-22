@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import urllib.request as url_op
+import urllib as url_op
 import re
 
 def main():
@@ -339,7 +339,7 @@ Description: Request an input that must be a positive number greater than zero.
 """
 def askObjectNumber():
 	while True:
-		print("type the number of the NGC object: ", end="")
+		print("type the number of the NGC object: ")
 		try:
 			ngc_num = int(input())
 			if ngc_num > 0:

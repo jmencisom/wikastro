@@ -14,155 +14,94 @@ def main():
 
 	soup, webpage = obtainPage(ngc_num)
 
-	try:
-		soup = deleteFontTags(soup)
-		basicInfoText = getMeaningValues(soup)
-		basicInfoData = getOrganizatedData(basicInfoText)
-		#print(basicInfoText)
-		#print(basicInfoData)
-		coordinatesTextWiki =  transformToCoordinatesWiki(basicInfoData[5].split())
-		wikiBox = transformToWikiBox(ngc_num, basicInfoData[3],
-									 basicInfoData[5].split(), basicInfoData[7],
-									 basicInfoData[9], basicInfoData[11],
-									 basicInfoData[13], webpage)
+	basicInfo = getValues(soup)
+	basicInfoData = getOrganizatedData(basicInfo)
+	
+	coordinates = (basicInfoData[5] + " " + basicInfoData[7]).split()
 
-		extraText = generateExtraInfo(ngc_num, webpage)
+	coordinatesTextWiki = transformToCoordinatesWiki(coordinates)
+	wikibox = transformToWikiBox(ngc_num, basicInfoData[3], coordinates,
+		basicInfoData[11], basicInfoData[9], basicInfoData[13],
+		basicInfoData[15], webpage)
+	extraText = generateExtraInfo(ngc_num, webpage)
 
-		print(wikiBox)
-		print(coordinatesTextWiki)
-		print(extraText)
-	except IndexError:
-		print("\nObject not found in database...")
+	print(wikibox)
+	print(coordinatesTextWiki)
+	print(extraText)
 
 
 
-"""
-Author: Andres Linares
-Date: 2018-02-14
-Modified: Never.
-Parameters: number of NGC object and url.
-Returns: String with external links for wikipedia.
-Description: generates external links section.
-
-"""
 def generateExtraInfo(ngc_num, webpage):
-	text = "==External links==\n*[" + webpage + " NGC " + ngc_num + " on SIMBAD" + "]\n"
+	"""
+	Generates external links section.
+
+	Author: Andres Linares
+	Date: 2018-02-14
+	Modified: Never.
+	Parameters: number of NGC object and url.
+	Returns: String with external links for wikipedia.
+	"""
+	text = ("==External links==\n*[" + webpage + " NGC " + ngc_num + 
+		" on SIMBAD" + "]\n")
 
 	return text + "[[Category:NGC objects|" + ngc_num + "]]"
 
-	
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: String that contains basic info about NGC object
-Returns: String array.
-Description: This method will try to obtain information such as:
-	Object type (obj_typ): Galaxy (g)
-	Epoch (epoch): J200...
-	Coordinates (cood): xx xx xx.xxxx xx xx xx.xxxx
-	Helio Radial Velocity (hrv): xxxx.xx
-	Red Shift (rs): x.xxxxx
-	Morphological type (morp_typ): Sabc...
-	Apparent magnitude B (b): xx.xxx
 
-"""
+	
 def getOrganizatedData(basicInfoText):
+	"""
+	This method will try to obtain information such as:
+	Object type (obj_typ)
+	Epoch (epoch)
+	Right Ascension Coordinates (coodRa)
+	Declination Coordinates (coodD)
+	Helio Radial Velocity (hrv)
+	Red Shift (rs)
+	Morphological type (morp_typ)
+	Apparent magnitude B (b)
+
+	Author: Andres Linares.
+	Date: 2018-02-14
+	Modified: 2018-02-27 by Andres Linares.
+	Parameters: String that contains basic info about NGC object.
+	Returns: String array.
+
+	"""
 	data = ["obj_typ", "",
-			"epoch", "",
-			"cood", "",
+			"epoch", "J2000",
+			"coodRA", "",
+			"coodD", "",
 			"hrv", "",
 			"rs", "",
 			"morp_typ", "",
 			"b", ""]
-	basicInfoTextSeparated = basicInfoText.splitlines()
-	#data[1] = getObjectType(basicInfoTextSeparated)
-	data[3] = getEpoch(basicInfoTextSeparated)
-	data[5] = getCoordinates(basicInfoTextSeparated)
-	data[7] = getHelioRadialVelocity(basicInfoTextSeparated)
-	data[9] = getRedShift(basicInfoTextSeparated)
-	data[11] = getMorphType(basicInfoTextSeparated)
-	data[13] = getAM_B(basicInfoTextSeparated)
+	basicInfoTextSeparated = basicInfoText.split("|")
+	print(basicInfoTextSeparated)
+	data[1] = basicInfoTextSeparated[3]
+	data[5] = basicInfoTextSeparated[1]
+	data[7] = basicInfoTextSeparated[2]
+	data[9] = basicInfoTextSeparated[4]
+	data[11] = basicInfoTextSeparated[5]
+	data[13] = basicInfoTextSeparated[7]
+	data[15] = basicInfoTextSeparated[6]
 
 	return data
 
 
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: Text that contains basic info about NGC object and that is
-            separated by lines.
-Returns: String
-Description: finds the apparent magnitud B.
 
-"""
-def getAM_B(basicInfoTextSeparated):
-	flag = 0
-	for text in basicInfoTextSeparated:
-		if text.find("Fluxes") >= 0:
-			flag = 1
-		if text.find("B") == 0 and flag == 1:
-			return text.split()[1]
-	return ""
+def getValues(soup):
+	"""
+	Using get_text() method from BeautifulSoup you get a lot of spaces
+	and new line characters, then is required to get rid of them to
+	ease the obtaining labor later.
 
-
-
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: Text that contains basic info about NGC object and that is
-            separated by lines.
-Returns: String.
-Description: finds the morphological type.
-
-"""
-def getMorphType(basicInfoTextSeparated):
-	flag = 0
-	for text in basicInfoTextSeparated:
-		if flag == 1:
-			return text
-		if text.find("Morphological") >= 0:
-			flag = 1
-	return ""
-
-
-
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: Text that contains basic info about NGC object and that is
-            separated by lines.
-Returns: String.
-Description: finds the epoch.
-
-"""
-def getEpoch(basicInfoTextSeparated):
-	for text in basicInfoTextSeparated:
-		if text.find("ep=") >= 0:
-			startPosition = text.find("=")
-			finalPosition = text.find(")")
-			return text[startPosition+1:finalPosition]
-	return ""
-
-
-	
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: BeautifulSoup object
-Returns: String that contains all the meaning data (basic info in simbad
-         database).
-Description: Using get_text() method from BeautifulSoup you get a lot of spaces
-             and new line characters, then is required to get rid of them to
-             ease the obtaining labor later.  The string ends when it finds a
-             'SIMBAD' word in it.
-
-"""
-def getMeaningValues(soup):
+	Author: Andres Linares.
+	Date: 2018-02-14
+	Modified: 2018-02-27 by Andres Linares.
+	Parameters: BeautifulSoup object
+	Returns: String that contains all the meaning data (basic info in simbad
+	         database).
+	"""
 	childs = soup.get_text()
 	text = ""
 	flag = 0
@@ -179,45 +118,27 @@ def getMeaningValues(soup):
 		if(child == " " and flag == 0):
 			text = text + " "
 			flag2 = 1
-		if(text.find("SIMBAD") > 0):
-			break
+
+	text = text.splitlines()
+	text = text[len(text)-1]
 
 	return text
 
 
-"""
-Author: Andres Linares
-Date: 2018-02-14
-Modified: Never.
-Parameters: BeautifulSoup object.
-Returns: BeautifulSoup object without <font size="-1"> </font>tags.
-Description: removes every single font tag with size -1 in the object passed
-             by parameter.
 
-"""
-def deleteFontTags(soup):
-	soup = soup.body.find_all("table")[2]
-	fontMinusOne = soup.find_all("font", size="-1")
-
-	for font in fontMinusOne:
-		font.decompose()
-	return soup
-
-
-
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: number of NGC object, epoch, coordinates as an array, hrv,
-            morphtype, apparent magnitude b, url
-Returns: String to paste into wikipedia.
-Description: This method creates a simple wikibox using the Infobox galaxy
-             template.
-
-"""
 def transformToWikiBox(ngc_num, epoch, coordinates, redShift,
                        helioRadialVelocity, morphType, b, webpage):
+	
+	"""
+	This method creates a simple wikibox using the Infobox galaxy template.
+
+	Author: Andres Linares.
+	Date: 2018-02-14
+	Modified: Never.
+	Parameters: number of NGC object, epoch, coordinates as an array, hrv,
+	            morphtype, apparent magnitude b, url
+	Returns: String to paste into wikipedia.
+	"""
 	text = "{{Infobox galaxy\n"
 	text = text + "| name = [[New General Catalogue|NGC]] " + ngc_num + "\n"
 	text = text + "| image = \n"
@@ -265,79 +186,16 @@ def transformToCoordinatesWiki(coordinates):
 
 
 
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: Text that contains basic info about NGC object and that is
-            separated by lines.
-Returns: String.
-Description: finds the red shift.
-
-"""
-def getRedShift(basicInfoTextSeparated):
-	flag = 0
-	for text in basicInfoTextSeparated:
-		if flag == 1:
-			return text.split()[1]
-		if text.find("km/s") >= 0:
-			flag = 1
-	return ""
-
-
-
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: Text that contains basic info about NGC object and that is
-            separated by lines.
-Returns: String.
-Description: finds the helio radial velocity.
-
-"""
-def getHelioRadialVelocity(basicInfoTextSeparated):
-	flag = 0
-	for text in basicInfoTextSeparated:
-		if flag == 1:
-			return text.split()[1]
-		if text.find("Radial velocity") >= 0:
-			flag = 1
-	return ""
-
-
-
-"""
-Author: Andres Linares.
-Date: 2018-02-14
-Modified: Never.
-Parameters: Text that contains basic info about NGC object and that is
-            separated by lines.
-Returns: String.
-Description: finds the coordinates.
-
-"""
-def getCoordinates(basicInfoTextSeparated) :
-	flag = 0
-	for text in basicInfoTextSeparated:
-		if flag == 1:
-			return text
-		if text.find("ep=") > 0:
-			flag = 1
-	return ""
-
-
-
-"""
-Author: Andres Linares.
-Date: 2018-02-13
-Modified: Never.
-Parameters: None.
-Returns: Integer greater than zero.
-Description: Request an input that must be a positive number greater than zero.
-
-"""
 def askObjectNumber():
+	"""
+	Request an input that must be a positive number greater than zero.
+
+	Author: Andres Linares.
+	Date: 2018-02-13
+	Modified: Never.
+	Parameters: None.
+	Returns: Integer greater than zero.
+	"""
 	while True:
 		print("type the number of the NGC object: ")
 		try:
@@ -351,22 +209,30 @@ def askObjectNumber():
 
 
 
-"""
-Author: Andres Linares.
-Date: 2018-02-13
-Modified: Never.
-Parameters: Integer encapsulated as a string.
-Returns: BeautifulSoup object encoded in 'lxml'
-Description: Search a NGC object in simbad database and then returns the
-	         query in its full html page.  The search could be empty.
-             This method uses urllib.request library.
 
-"""
 def obtainPage(ngc_num):
-	searchingPt1 = "http://simbad.u-strasbg.fr/simbad/sim-basic?Ident=NGC+"
-	searchingPt2 = "&submit=SIMBAD+search"
+	"""
+	Search a NGC object in simbad database and then returns the query in its
+	full html page.  The search could be empty. This method uses urllib library.
+
+	Author: Andres Linares.
+	Date: 2018-02-13
+	Modified: 2018-02-27 by Andres Linares
+	Parameters: Integer encapsulated as a string.
+	Returns: BeautifulSoup object encoded in 'lxml'
+	"""
+	searchingPt1 = ("http://simbad.u-strasbg.fr/simbad/sim-script?submit=" + 
+		"submit+script&script=format+object+form1+%22%25IDLIST%281%29" +
+		"%7C%25COO%28%3BA%3BJ2000%29%7C%25COO%28%3BD%3BJ2000%29%7C+%25OTYPE" + 
+		"%28V%29%7C%25RV%28V%29%7C%25RV%28Z%29%7C%25FLUXLIST%28B%3B+F%29%7C%" + 
+		"25MT%28M%29%7C%22%0D%0Aquery+id+ngc+")
+	searchingPt2 = "%0D%0A"
 	searchingWord = searchingPt1 + ngc_num + searchingPt2
-	webpage = searchingWord
+
+	searchingURL1 = "http://simbad.u-strasbg.fr/simbad/sim-basic?Ident=NGC+"
+	searchingURL2 = "&submit=SIMBAD+search"
+	searchingURLWord = searchingURL1 + ngc_num + searchingURL2
+	webpage = searchingURLWord
 
 	searchingPage = url_op.urlopen(searchingWord)
 	return BeautifulSoup(searchingPage, "lxml"), webpage

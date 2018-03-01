@@ -10,31 +10,38 @@ def main():
 	ngc_num = str(ngc_num)
 	ngc_nomb = ngc + " " + ngc_num
 	print("\nobject: " + ngc_nomb)
-	print("\nsearching object in database...\n")
 
-	soup, webpage = obtainPage(ngc_num)
+	try:
+		soup, webpage = obtainPage(ngc_num)
+	except IOError as err:
+		print ("\nCan not connect to internet.\n")
+	else:
+		print("\nSearching object in database...\n")
+		basicInfo = getValues(soup)
 
-	basicInfo = getValues(soup)
-	basicInfoData = getOrganizatedData(basicInfo)
-	
-	coordinates = (basicInfoData[5] + " " + basicInfoData[7]).split()
+		try:
+			basicInfoData = getOrganizatedData(basicInfo)
+		except IndexError as err:
+			print("\nThe object is not found in database.\n")
+		else:
+			coordinates = (basicInfoData[5] + " " + basicInfoData[7]).split()
 
-	coordinatesTextWiki = transformToCoordinatesWiki(coordinates)
-	wikibox = transformToWikiBox(ngc_num, basicInfoData[3], coordinates,
-		basicInfoData[11], basicInfoData[9], basicInfoData[13],
-		basicInfoData[15], webpage)
-	extraText = generateExtraInfo(ngc_num, webpage)
+			coordinatesTextWiki = transformToCoordinatesWiki(coordinates)
+			wikibox = transformToWikiBox(ngc_num, basicInfoData[3], coordinates,
+				basicInfoData[11], basicInfoData[9], basicInfoData[13],
+				basicInfoData[15], webpage)
+			extraText = generateExtraInfo(ngc_num, webpage)
 
-	print(wikibox)
-	print(coordinatesTextWiki)
-	print(extraText)
+			print(wikibox)
+			print(coordinatesTextWiki)
+			print(extraText)
 
 
 
 def generateExtraInfo(ngc_num, webpage):
 	"""
 	Generates external links section.
-
+ 
 	Author: Andres Linares
 	Date: 2018-02-14
 	Modified: Never.
@@ -75,8 +82,8 @@ def getOrganizatedData(basicInfoText):
 			"rs", "",
 			"morp_typ", "",
 			"b", ""]
+	"""print(basicInfoTextSeparated)"""
 	basicInfoTextSeparated = basicInfoText.split("|")
-	print(basicInfoTextSeparated)
 	data[1] = basicInfoTextSeparated[3]
 	data[5] = basicInfoTextSeparated[1]
 	data[7] = basicInfoTextSeparated[2]
@@ -84,7 +91,6 @@ def getOrganizatedData(basicInfoText):
 	data[11] = basicInfoTextSeparated[5]
 	data[13] = basicInfoTextSeparated[7]
 	data[15] = basicInfoTextSeparated[6]
-
 	return data
 
 

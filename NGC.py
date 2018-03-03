@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import urllib as url_op
 import re
+from BasicInfo import BasicInfo
 
 def main():
 	ngc = "NGC"
@@ -12,29 +13,22 @@ def main():
 	print("\nobject: " + ngc_nomb)
 
 	try:
-		soup, webpage = obtainPage(ngc_num)
-	except IOError as err:
-		print ("\nCan not connect to internet.\n")
-	else:
 		print("\nSearching object in database...\n")
-		basicInfo = getValues(soup)
+		soup, webpage = obtainPage(ngc_num)
+		text_basicInfo = getValues(soup)
+		basicInfo = BasicInfo(text_basicInfo)
 
-		try:
-			basicInfoData = getOrganizatedData(basicInfo)
-		except IndexError as err:
-			print("\nThe object is not found in database.\n")
-		else:
-			coordinates = (basicInfoData[5] + " " + basicInfoData[7]).split()
+		coordinatesTextWiki = transformToCoordinatesWiki(basicInfo.getCoordinates())
+		wikibox = transformToWikiBox(ngc_num, basicInfo, webpage)
+		extraText = generateExtraInfo(ngc_num, webpage)
 
-			coordinatesTextWiki = transformToCoordinatesWiki(coordinates)
-			wikibox = transformToWikiBox(ngc_num, basicInfoData[3], coordinates,
-				basicInfoData[11], basicInfoData[9], basicInfoData[13],
-				basicInfoData[15], webpage)
-			extraText = generateExtraInfo(ngc_num, webpage)
-
-			print(wikibox)
-			print(coordinatesTextWiki)
-			print(extraText)
+		print(wikibox)
+		print(coordinatesTextWiki)
+		print(extraText)
+	except IOError as err:
+		print ("\nCan not connect to Internet.\n")
+	except IndexError as err:
+		print("\nThe object was not found in database.\n")		
 
 
 
@@ -52,46 +46,6 @@ def generateExtraInfo(ngc_num, webpage):
 		" on SIMBAD" + "]\n")
 
 	return text + "[[Category:NGC objects|" + ngc_num + "]]"
-
-
-	
-def getOrganizatedData(basicInfoText):
-	"""
-	This method will try to obtain information such as:
-	Object type (obj_typ)
-	Epoch (epoch)
-	Right Ascension Coordinates (coodRa)
-	Declination Coordinates (coodD)
-	Helio Radial Velocity (hrv)
-	Red Shift (rs)
-	Morphological type (morp_typ)
-	Apparent magnitude B (b)
-
-	Author: Andres Linares.
-	Date: 2018-02-14
-	Modified: 2018-02-27 by Andres Linares.
-	Parameters: String that contains basic info about NGC object.
-	Returns: String array.
-
-	"""
-	data = ["obj_typ", "",
-			"epoch", "J2000",
-			"coodRA", "",
-			"coodD", "",
-			"hrv", "",
-			"rs", "",
-			"morp_typ", "",
-			"b", ""]
-	"""print(basicInfoTextSeparated)"""
-	basicInfoTextSeparated = basicInfoText.split("|")
-	data[1] = basicInfoTextSeparated[3]
-	data[5] = basicInfoTextSeparated[1]
-	data[7] = basicInfoTextSeparated[2]
-	data[9] = basicInfoTextSeparated[4]
-	data[11] = basicInfoTextSeparated[5]
-	data[13] = basicInfoTextSeparated[7]
-	data[15] = basicInfoTextSeparated[6]
-	return data
 
 
 
@@ -132,15 +86,14 @@ def getValues(soup):
 
 
 
-def transformToWikiBox(ngc_num, epoch, coordinates, redShift,
-                       helioRadialVelocity, morphType, b, webpage):
+def transformToWikiBox(ngc_num, basicInfo, webpage):
 	
 	"""
 	This method creates a simple wikibox using the Infobox galaxy template.
 
 	Author: Andres Linares.
 	Date: 2018-02-14
-	Modified: Never.
+	Modified: 2018-03-03 by Andres Linares
 	Parameters: number of NGC object, epoch, coordinates as an array, hrv,
 	            morphtype, apparent magnitude b, url
 	Returns: String to paste into wikipedia.
@@ -149,17 +102,17 @@ def transformToWikiBox(ngc_num, epoch, coordinates, redShift,
 	text = text + "| name = [[New General Catalogue|NGC]] " + ngc_num + "\n"
 	text = text + "| image = \n"
 	text = text + "| caption = \n"
-	text = text + "| epoch = [[" + epoch + "]]\n <ref name=\"simbad\">{{cite web|title=SIMBAD Astronomical" + "Database - CDS (Strasbourg)|work=Results for NGC " + ngc_num + "|url=" + webpage + "}}</ref>\n"
-	text = text + "| ra = {{RA|" + coordinates[0] + "|" + coordinates[1] + "|" + coordinates[2] + "}} <ref name=\"simbad\" />\n"
-	text = text + "| dec = {{DEC|" + coordinates[3] + "|" + coordinates[4] + "|" + coordinates[5] + "}} <ref name=\"simbad\" />\n"
+	text = text + "| epoch = [[" + basicInfo.getEpoch() + "]]\n <ref name=\"simbad\">{{cite web|title=SIMBAD Astronomical" + "Database - CDS (Strasbourg)|work=Results for NGC " + ngc_num + "|url=" + webpage + "}}</ref>\n"
+	text = text + "| ra = {{RA|" + basicInfo.getCoordinates()[0] + "|" + basicInfo.getCoordinates()[1] + "|" + basicInfo.getCoordinates()[2] + "}} <ref name=\"simbad\" />\n"
+	text = text + "| dec = {{DEC|" + basicInfo.getCoordinates()[3] + "|" +basicInfo.getCoordinates()[4] + "|" + basicInfo.getCoordinates()[5] + "}} <ref name=\"simbad\" />\n"
 	text = text + "| constellation name = \n"
-	text = (text + "| z = " + redShift + " <ref name=\"simbad\" />\n") if (redShift != "") else text + "| z = \n"																
-	text = (text + "| h_radial_v = {{nowrap|" + helioRadialVelocity + "[[Metre per second|km/s]]}} <ref name=\"simbad\" />\n") if (helioRadialVelocity != "") else text + "| h_radial_v = \n" 
+	text = (text + "| z = " + basicInfo.getRedShift() + " <ref name=\"simbad\" />\n") if (basicInfo.getRedShift() != "") else text + "| z = \n"																
+	text = (text + "| h_radial_v = {{nowrap|" + basicInfo.getHelioRadialVelocity() + "[[Metre per second|km/s]]}} <ref name=\"simbad\" />\n") if (basicInfo.getHelioRadialVelocity() != "") else text + "| h_radial_v = \n" 
 	text = text + "| gal_v = \n"																			
 	text = text + "| dist_ly = \n"
-	text = (text + "| type = " + morphType + "<ref name=\"simbad\" />\n") if (morphType != "") else text + "| type = \n"
+	text = (text + "| type = " + basicInfo.getMorphologicalType() + "<ref name=\"simbad\" />\n") if (basicInfo.getMorphologicalType() != "") else text + "| type = \n"
 	text = text + "| size_v = \n"
-	text = text + "| appmag_b = " + b + "<ref name=\"simbad\" />\n"
+	text = text + "| appmag_b = " + basicInfo.getApparentMagnitude() + "<ref name=\"simbad\" />\n"
 	text = text + "| notes = \n"
 	text = text + "| names = \n"
 	text = text + "}}"
@@ -167,20 +120,20 @@ def transformToWikiBox(ngc_num, epoch, coordinates, redShift,
 
 
 
-"""
-Author: Andres Linares.
-Date: 2018-02-13
-Modified: Never.
-Parameters: String array that contains right ascension in first three positions
-	        and declination in last three.
-Returns: String to inject into wikipedia.
-Description: Using the SKY_TEMPLATE found in wikipedia, the values are placed
-	         just like the example.  Last value indicates the distance in light
-             years (not implemented yet).
-Example: {{Sky|00|07|15.86||27|42|29.7|190000000}}
 
-"""
 def transformToCoordinatesWiki(coordinates):
+	"""
+	Using the SKY_TEMPLATE found in wikipedia, the values are placed
+ 	just like the example.  Last value indicates the distance in light
+ 	years (not implemented yet).
+
+	Author: Andres Linares.
+	Date: 2018-02-13
+	Modified: Never.
+	Parameters: String array that contains right ascension in first three positions
+		        and declination in last three.
+	Returns: String to inject into wikipedia.
+	"""
 	text = "{{Sky|"
 	for x in range(0, 6):
 		text = text + coordinates[x]

@@ -56,28 +56,50 @@ class BasicInfo:
 		return self.__attributes
 
 	def getObjectType(self):
-		return self.__objectType
+		if(self.testEmptiness(self.__objectType, "Object Type")):
+			return ""
+		else:
+			return self.__objectType
 
 	def getEpoch(self):
 		return self.__epoch
 
 	def getRightAscension(self):
-		return self.__rightAscension
+		if(self.testEmptiness(self.__rightAscension, "Right Ascension")):
+			return ""
+		else:
+			return self.__rightAscension
 
 	def getDeclination(self):
-		return self.__declination
+		if(self.testEmptiness(self.__declination, "Declination")):
+			return ""
+		else:
+			return self.__declination
 
 	def getHelioRadialVelocity(self):
-		return self.__helioRadialVelocity
+		if(self.testEmptiness(self.__helioRadialVelocity,
+				"Helio Radial Velocity")):
+			return ""
+		else:
+			return self.__helioRadialVelocity
 
 	def getRedShift(self):
-		return self.__redShift
+		if(self.testEmptiness(self.__redShift, "Red Shift")):
+			return ""
+		else:
+			return self.__redShift
 
 	def getMorphologicalType(self):
-		return self.__morphologicalType
+		if(self.testEmptiness(self.__morphologicalType, "Morphological Type")):
+			return ""
+		else:
+			return self.__morphologicalType
 
 	def getApparentMagnitude(self):
-		return self.__apparentMagnitude
+		if(self.testEmptiness(self.__apparentMagnitude, "Apparent Magnitude")):
+			return ""
+		else:
+			return self.__apparentMagnitude
 
 	def getCoordinates(self):
 		"""
@@ -90,4 +112,21 @@ class BasicInfo:
 		Parameters: Nothing.
 		Returns: Coordinates in the form: right_ascension declination.
 		"""
-		return (self.__rightAscension + " " + self.__declination).split()
+		return (self.getRightAscension() + " " + self.getDeclination()).split()
+
+	def testEmptiness(self, variable, name):
+		"""
+		This method test the emptiness of a variable. The emptiness is
+		represented by a empty string '' or by this string: '~'. If
+		the variable is empty then True is returned.
+
+		Author: Andres Linares.
+		Date: 2018-03-03
+		Modified: Never.
+		Parameters: Variable to test and name of the variable to print.
+		Returns: True if variable is empty.
+		"""
+		if(variable == "" or variable == "~"):
+			print("There is no info about " + name + ".")
+			return True
+		return False

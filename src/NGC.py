@@ -116,7 +116,7 @@ def transformToWikiBox(ngc_num, basicInfo, webpage):
 	text = text + "| size_v = \n"
 	text = text + "| appmag_b = " + basicInfo.getApparentMagnitude() + "<ref name=\"simbad\" />\n"
 	text = text + "| notes = \n"
-	text = text + "| names = \n"
+	text = text + "| names = " +basicInfo.getOtherNames() + " <ref name=\"simbad\" />\n"
 	text = text + "}}"
 	return text
 
@@ -158,15 +158,15 @@ def askObjectNumber():
 	Returns: Integer greater than zero.
 	"""
 	while True:
-		print("type the number of the NGC object: ")
+		print("Type the number of the NGC object: ")
 		try:
 			ngc_num = int(input())
 			if ngc_num > 0:
 				return ngc_num
 			else:
-				print("input must be positive and greater than zero.\n")
-		except ValueError:
-			print("input must be a number.\n")
+				print("Input must be positive and greater than zero.\n")
+		except (ValueError, NameError, SyntaxError):
+			print("Input must be a number.\n")
 
 
 
@@ -182,11 +182,12 @@ def obtainPage(ngc_num):
 	Parameters: Integer encapsulated as a string.
 	Returns: BeautifulSoup object encoded in 'lxml'
 	"""
-	searchingPt1 = ("http://simbad.u-strasbg.fr/simbad/sim-script?submit=" + 
+	searchingPt1 = ("http://simbad.u-strasbg.fr/simbad/sim-script?submit=" +
 		"submit+script&script=format+object+form1+%22%25IDLIST%281%29" +
-		"%7C%25COO%28%3BA%3BJ2000%29%7C%25COO%28%3BD%3BJ2000%29%7C+%25OTYPE" + 
-		"%28V%29%7C%25RV%28V%29%7C%25RV%28Z%29%7C%25FLUXLIST%28B%3B+F%29%7C%" + 
-		"25MT%28M%29%7C%22%0D%0Aquery+id+ngc+")
+		"%7C%25COO%28%3BA%3BJ2000%29%7C%25COO%28%3BD%3BJ2000%29%7C+%25OTYPE" +
+		"%28V%29%7C%25RV%28V%29%7C%25RV%28Z%29%7C%25FLUXLIST%28B%3B+F%29%7C" +
+		"%25MT%28M%29%7C%25IDLIST%28SA%28%20%2c%20%29%3B%29%7C%22%0D%0A" +
+		"query+id+ngc+")
 	searchingPt2 = "%0D%0A"
 	searchingWord = searchingPt1 + ngc_num + searchingPt2
 

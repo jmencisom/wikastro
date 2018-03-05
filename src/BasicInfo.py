@@ -22,6 +22,7 @@ class BasicInfo:
 		self.__redShift = ""
 		self.__morphologicalType = ""
 		self.__apparentMagnitude = ""
+		self.__otherNames = ""
 		self.__obtainValues()
 
 
@@ -46,6 +47,7 @@ class BasicInfo:
 		self.__redShift = separatedText[5]
 		self.__morphologicalType = separatedText[7]
 		self.__apparentMagnitude = separatedText[6]
+		self.__otherNames = separatedText[8].replace(",",u"·")
 
 
 	def setAttributes(self, attributes):
@@ -100,6 +102,12 @@ class BasicInfo:
 			return ""
 		else:
 			return self.__apparentMagnitude
+
+	def getOtherNames(self):
+		if(self.testEmptiness(self.__apparentMagnitude, "Other Names")):
+			return ""
+		else:
+			return self.__otherNames
 
 	def getCoordinates(self):
 		"""

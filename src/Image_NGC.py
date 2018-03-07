@@ -9,6 +9,7 @@ class Image_NGC:
 
 	def __init__(self, name):
 		self.__name = name
+		self.__image = ""
 
 	def getImage(self):
 		"""
@@ -24,10 +25,19 @@ class Image_NGC:
 		json = self.__obtainPage()
 		images = json["query"]["search"]
 		index = self.__getIndexNewerImage(images)
-		return images[index]["title"][5:]
+		self.__image = images[index]["title"][5:]
+		return self.__image
 
-	def getCaption(self, image):
-		pass
+
+
+	def getCaption(self, ngc_name):
+		telescope = ""
+		reference = ("<ref>{{cite web|title=123abc|url=abc123|website=a1b2c3|" +
+			"accessdate=1a2b3c}}</ref>")
+		text = ngc_name + " taken by [[" + telescope + "]]." + reference
+		return text
+
+
 
 	def __getIndexNewerImage(self, json):
 		"""

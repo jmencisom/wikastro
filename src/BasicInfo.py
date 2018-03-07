@@ -25,15 +25,15 @@ class BasicInfo:
 		self.__otherNames = ""
 
 		self.__namesReferences = [[" UGC", " [[Uppsala General Catalogue|UGC]]"],
-								[" PGC", " [[Principal Galaxies Catalogue|PGC]]"],
-								[" MCG", " [[Morphological Catalogue of Galaxies|MCG]]"],
-								[" GC", " [[Catalogue of Nebulae and Clusters of Stars|GC]]"],
-								[" CGCG", " [[Catalogue of Galaxies and Clusters of Galaxies|CGCG]]"],
-								[" NGC", " [[New General Catalogue|NGC]]"],
-								[" ESO", " [[ESO]]"],
-								[" Tuc", " [[Bayer designation|&xi; Tuc]]"],
-								[" 1RXS", " [[1RXS]]"],
-								[" 2MASX", " [[2MASX]]"]]
+			[" PGC", " [[Principal Galaxies Catalogue|PGC]]"],
+			[" MCG", " [[Morphological Catalogue of Galaxies|MCG]]"],
+			[" GC", " [[Catalogue of Nebulae and Clusters of Stars|GC]]"],
+			[" CGCG", " [[Catalogue of Galaxies and Clusters of Galaxies|CGCG]]"],
+			[" NGC", " [[New General Catalogue|NGC]]"],
+			[" ESO", " [[ESO]]"],
+			[" Tuc", " [[Bayer designation|&xi; Tuc]]"],
+			[" 1RXS", " [[1RXS]]"],
+			[" 2MASX", " [[2MASX]]"]]
 		self.__obtainValues()
 
 

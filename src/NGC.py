@@ -5,6 +5,7 @@ import urllib as url_op
 import re
 from BasicInfo import BasicInfo
 from Image_NGC import Image_NGC
+from datetime import date
 
 def main():
 	ngc = "NGC"
@@ -22,11 +23,13 @@ def main():
 		basicInfo = BasicInfo(text_basicInfo)
 		image = Image_NGC(ngc_nomb)
 		imageName = image.getImage()
+		imageCaption = image.getCaption(ngc_nomb)
 
 
 		coordinatesTextWiki = transformToCoordinatesWiki(
 			basicInfo.getCoordinates())
-		wikibox = transformToWikiBox(ngc_num, basicInfo, webpage, imageName)
+		wikibox = transformToWikiBox(ngc_num, basicInfo, webpage, imageName,
+			imageCaption)
 		extraText = generateExtraInfo(ngc_num, webpage)
 
 		print(wikibox)
@@ -93,23 +96,24 @@ def getValues(soup):
 
 
 
-def transformToWikiBox(ngc_num, basicInfo, webpage, imageName):
+def transformToWikiBox(ngc_num, basicInfo, webpage, imageName, imageCaption):
 	
 	"""
 	This method creates a simple wikibox using the Infobox galaxy template.
 
 	Author: Andres Linares.
 	Date: 2018-02-14
-	Modified: 2018-03-036by Andres Linares
-	Parameters: number of NGC object, basicInfo object, webpage and image
-		file name.
+	Modified: 2018-03-07 by Andres Linares
+	Parameters: number of NGC object, basicInfo object, webpage, image
+		file name and reference of the image file name.
 	Returns: String to paste into wikipedia.
 	"""
+	reference = obtainReference(ngc_num, webpage)
 	text = "{{Infobox galaxy\n"
 	text = text + "| name = [[New General Catalogue|NGC]] " + ngc_num + "\n"
 	text = text + "| image = " + imageName + "\n"
-	text = text + "| caption = \n"
-	text = text + "| epoch = [[" + basicInfo.getEpoch() + "]]\n <ref name=\"simbad\">{{cite web|title=SIMBAD Astronomical" + "Database - CDS (Strasbourg)|work=Results for NGC " + ngc_num + "|url=" + webpage + "}}</ref>\n"
+	text = text + "| caption = " + imageCaption + "\n"
+	text = text + "| epoch = [[" + basicInfo.getEpoch() + "]]" + reference
 	text = text + "| ra = {{RA|" + basicInfo.getCoordinates()[0] + "|" + basicInfo.getCoordinates()[1] + "|" + basicInfo.getCoordinates()[2] + "}} <ref name=\"simbad\" />\n"
 	text = text + "| dec = {{DEC|" + basicInfo.getCoordinates()[3] + "|" +basicInfo.getCoordinates()[4] + "|" + basicInfo.getCoordinates()[5] + "}} <ref name=\"simbad\" />\n"
 	text = text + "| constellation name = \n"
@@ -126,6 +130,40 @@ def transformToWikiBox(ngc_num, basicInfo, webpage, imageName):
 	return text
 
 
+
+def obtainReference(ngc_num, webpage):
+	"""
+	Elaborates a reference using the webpage of simbad, the number of the
+	ngc object and today's date.
+
+	Author: Andres Linares.
+	Date: 2018-03-07
+	Modified: Never.
+	Parameters: Number of ngc object and url of the webpage.
+	Returns: String with the reference.
+	"""
+	reference = ("<ref name=\"simbad\">{{cite web\n" +
+	"  |title=SIMBAD Astronomical Database - CDS (Strasbourg)\n" +
+	"  |work=Results for NGC " + ngc_num + "\n" + 
+	"  |url=" + webpage + "\n" + 
+	"  |accessdate=" + str(obtainActualDate()) + "}}</ref>\n")
+	return reference
+
+
+
+def obtainActualDate():
+	"""
+	Obtains actual date by using the datetime python library in the format
+	yyyy-mm-dd
+
+	Author: Andres Linares.
+	Date: 2018-03-07
+	Modified: Never.
+	Parameters: Nothing
+	Returns: Date object with today's date.
+	"""
+	today = date.today()
+	return today
 
 
 def transformToCoordinatesWiki(coordinates):

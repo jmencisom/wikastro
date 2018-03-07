@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import urllib as url_op
 import re
 from BasicInfo import BasicInfo
+from Image_NGC import Image_NGC
 
 def main():
 	ngc = "NGC"
@@ -19,9 +20,13 @@ def main():
 		soup, webpage = obtainPage(ngc_num)
 		text_basicInfo = getValues(soup)
 		basicInfo = BasicInfo(text_basicInfo)
+		image = Image_NGC(ngc_nomb)
+		imageName = image.getImage()
 
-		coordinatesTextWiki = transformToCoordinatesWiki(basicInfo.getCoordinates())
-		wikibox = transformToWikiBox(ngc_num, basicInfo, webpage)
+
+		coordinatesTextWiki = transformToCoordinatesWiki(
+			basicInfo.getCoordinates())
+		wikibox = transformToWikiBox(ngc_num, basicInfo, webpage, imageName)
 		extraText = generateExtraInfo(ngc_num, webpage)
 
 		print(wikibox)
@@ -88,21 +93,21 @@ def getValues(soup):
 
 
 
-def transformToWikiBox(ngc_num, basicInfo, webpage):
+def transformToWikiBox(ngc_num, basicInfo, webpage, imageName):
 	
 	"""
 	This method creates a simple wikibox using the Infobox galaxy template.
 
 	Author: Andres Linares.
 	Date: 2018-02-14
-	Modified: 2018-03-03 by Andres Linares
-	Parameters: number of NGC object, epoch, coordinates as an array, hrv,
-	            morphtype, apparent magnitude b, url
+	Modified: 2018-03-036by Andres Linares
+	Parameters: number of NGC object, basicInfo object, webpage and image
+		file name.
 	Returns: String to paste into wikipedia.
 	"""
 	text = "{{Infobox galaxy\n"
 	text = text + "| name = [[New General Catalogue|NGC]] " + ngc_num + "\n"
-	text = text + "| image = \n"
+	text = text + "| image = " + imageName + "\n"
 	text = text + "| caption = \n"
 	text = text + "| epoch = [[" + basicInfo.getEpoch() + "]]\n <ref name=\"simbad\">{{cite web|title=SIMBAD Astronomical" + "Database - CDS (Strasbourg)|work=Results for NGC " + ngc_num + "|url=" + webpage + "}}</ref>\n"
 	text = text + "| ra = {{RA|" + basicInfo.getCoordinates()[0] + "|" + basicInfo.getCoordinates()[1] + "|" + basicInfo.getCoordinates()[2] + "}} <ref name=\"simbad\" />\n"

@@ -186,7 +186,7 @@ def obtainPage(ngc_num):
 		"submit+script&script=format+object+form1+%22%25IDLIST%281%29" +
 		"%7C%25COO%28%3BA%3BJ2000%29%7C%25COO%28%3BD%3BJ2000%29%7C+%25OTYPE" +
 		"%28V%29%7C%25RV%28V%29%7C%25RV%28Z%29%7C%25FLUXLIST%28B%3B+F%29%7C" +
-		"%25MT%28M%29%7C%25IDLIST%28SA%28%20%2c%20%29%3B%29%7C%22%0D%0A" +
+		"%25MT%28M%29%7C%25IDLIST%28SA%28%2c%20%29%3B%29%7C%22%0D%0A" +
 		"query+id+ngc+")
 	searchingPt2 = "%0D%0A"
 	searchingWord = searchingPt1 + ngc_num + searchingPt2

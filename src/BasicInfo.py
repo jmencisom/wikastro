@@ -9,7 +9,7 @@ class BasicInfo:
 
 		Author: Andres Linares
 		Date: 2018-03-03
-		Modified: Never.
+		Modified: 2018-03-06 By Francisco Rodríguez.
 		Parameters: String that contains basic info separated by '|'
 		Returns: Nothing.
 		"""
@@ -23,6 +23,17 @@ class BasicInfo:
 		self.__morphologicalType = ""
 		self.__apparentMagnitude = ""
 		self.__otherNames = ""
+
+		self.__namesReferences = [[" UGC", " [[Uppsala General Catalogue|UGC]]"],
+								[" PGC", " [[Principal Galaxies Catalogue|PGC]]"],
+								[" MCG", " [[Morphological Catalogue of Galaxies|MCG]]"],
+								[" GC", " [[Catalogue of Nebulae and Clusters of Stars|GC]]"],
+								[" CGCG", " [[Catalogue of Galaxies and Clusters of Galaxies|CGCG]]"],
+								[" NGC", " [[New General Catalogue|NGC]]"],
+								[" ESO", " [[ESO]]"],
+								[" Tuc", " [[Bayer designation|&xi; Tuc]]"],
+								[" 1RXS", " [[1RXS]]"],
+								[" 2MASX", " [[2MASX]]"]]
 		self.__obtainValues()
 
 
@@ -35,7 +46,7 @@ class BasicInfo:
 
 		Author: Andres Linares
 		Date: 2018-03-03
-		Modified: Never.
+		Modified: 2018-03-03 by Francisco Rodríguez.
 		Parameters: Nothing.
 		Returns: Nothing.
 		"""
@@ -47,7 +58,7 @@ class BasicInfo:
 		self.__redShift = separatedText[5]
 		self.__morphologicalType = separatedText[7]
 		self.__apparentMagnitude = separatedText[6]
-		self.__otherNames = separatedText[8].replace(",",u"·")
+		self.__otherNames = self.formatOtherNames(separatedText[8])
 
 
 	def setAttributes(self, attributes):
@@ -104,7 +115,7 @@ class BasicInfo:
 			return self.__apparentMagnitude
 
 	def getOtherNames(self):
-		if(self.testEmptiness(self.__apparentMagnitude, "Other Names")):
+		if(self.testEmptiness(self.__otherNames, "Other Names")):
 			return ""
 		else:
 			return self.__otherNames
@@ -121,6 +132,27 @@ class BasicInfo:
 		Returns: Coordinates in the form: right_ascension declination.
 		"""
 		return (self.getRightAscension() + " " + self.getDeclination()).split()
+
+
+	def formatOtherNames(self, names):
+		"""
+		This method checks that the main name is not included and also 
+		adds the known references.
+
+		Author: Francisco Rodriguez
+		Date: 2018-03-06
+		Modified: Never.
+		Parameters: A string that contains the list of names returned by simbad.
+		Returns: A String that contains the referenced names.
+		"""
+		format_names=names[names.find(",")+1:] #elimina primer nombre (NGC)
+		for ref in self.__namesReferences:
+			#format_names.replace(ref[0], ref[1]) ideal, pero no está funcionando
+			inicio = format_names.find(ref[0])
+			if (inicio>=0):
+				sub1 = format_names[:inicio]
+				format_names = sub1 + ref[1] + format_names[inicio+len(ref[0]):]
+		return format_names
 
 	def testEmptiness(self, variable, name):
 		"""

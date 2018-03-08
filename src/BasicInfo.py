@@ -61,12 +61,17 @@ class BasicInfo:
 		self.__otherNames = self.formatOtherNames(separatedText[8])
 
 
+
 	def setAttributes(self, attributes):
 		self.__attributes = attributes
 		self.__obtainValues()
 
+
+
 	def getAttributes(self):
 		return self.__attributes
+
+
 
 	def getObjectType(self):
 		if(self.testEmptiness(self.__objectType, "Object Type")):
@@ -74,8 +79,12 @@ class BasicInfo:
 		else:
 			return self.__objectType
 
+
+
 	def getEpoch(self):
 		return self.__epoch
+
+
 
 	def getRightAscension(self):
 		if(self.testEmptiness(self.__rightAscension, "Right Ascension")):
@@ -83,11 +92,15 @@ class BasicInfo:
 		else:
 			return self.__rightAscension
 
+
+
 	def getDeclination(self):
 		if(self.testEmptiness(self.__declination, "Declination")):
 			return ""
 		else:
 			return self.__declination
+
+
 
 	def getHelioRadialVelocity(self):
 		if(self.testEmptiness(self.__helioRadialVelocity,
@@ -96,11 +109,15 @@ class BasicInfo:
 		else:
 			return self.__helioRadialVelocity
 
+
+
 	def getRedShift(self):
 		if(self.testEmptiness(self.__redShift, "Red Shift")):
 			return ""
 		else:
 			return self.__redShift
+
+
 
 	def getMorphologicalType(self):
 		if(self.testEmptiness(self.__morphologicalType, "Morphological Type")):
@@ -108,17 +125,23 @@ class BasicInfo:
 		else:
 			return self.__morphologicalType
 
+
+
 	def getApparentMagnitude(self):
 		if(self.testEmptiness(self.__apparentMagnitude, "Apparent Magnitude")):
 			return ""
 		else:
 			return self.__apparentMagnitude
 
+
+
 	def getOtherNames(self):
 		if(self.testEmptiness(self.__otherNames, "Other Names")):
 			return ""
 		else:
 			return self.__otherNames
+
+
 
 	def getCoordinates(self):
 		"""
@@ -132,6 +155,7 @@ class BasicInfo:
 		Returns: Coordinates in the form: right_ascension declination.
 		"""
 		return (self.getRightAscension() + " " + self.getDeclination()).split()
+
 
 
 	def formatOtherNames(self, names):
@@ -153,6 +177,8 @@ class BasicInfo:
 				sub1 = format_names[:inicio]
 				format_names = sub1 + ref[1] + format_names[inicio+len(ref[0]):]
 		return format_names
+
+
 
 	def testEmptiness(self, variable, name):
 		"""

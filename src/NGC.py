@@ -6,6 +6,10 @@ from Image_NGC import Image_NGC
 from WikiGeneration import WikiGeneration
 from ObtainInfo import ObtainInfo
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 def main():
 	ngc = "NGC"
 	ngc_num = askObjectNumber()

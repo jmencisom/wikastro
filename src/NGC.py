@@ -3,7 +3,6 @@
 import re
 from BasicInfo import BasicInfo
 from Image_NGC import Image_NGC
-from datetime import date
 from WikiGeneration import WikiGeneration
 from ObtainInfo import ObtainInfo
 

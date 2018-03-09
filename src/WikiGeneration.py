@@ -11,20 +11,19 @@ class WikiGeneration:
 
 
 
-	def generateExtraInfo(self, webpage, ngc_num):
+	def generateExtraInfo(self, ngc_num, webpage):
 		"""
 		Generates external links section.
 	 
 		Author: Andres Linares
 		Date: 2018-02-14
-		Modified: Never.
+		Modified: 2018-03-08 by Andres Linares.
 		Parameters: number of NGC object and url.
 		Returns: String with external links for wikipedia.
 		"""
-		text = ("==External links==\n*[" + webpage + " NGC " + ngc_num + 
-			" on SIMBAD" + "]\n")
-
-		return text + "[[Category:NGC objects|" + ngc_num + "]]"
+		text = ("==External links==\n*[{0} NGC {num} on SIMBAD]\n" +
+			"[[Category:NGC objects|{num}]]").format(webpage, num = ngc_num)
+		return text
 
 
 
@@ -35,15 +34,16 @@ class WikiGeneration:
 
 		Author: Andres Linares.
 		Date: 2018-03-07
-		Modified: Never.
+		Modified: 2018-03-08 by Andres Linares.
 		Parameters: Number of ngc object and url of the webpage.
 		Returns: String with the reference.
 		"""
-		reference = ("<ref name=\"simbad\">{{cite web\n" +
+		reference = ("<ref name=\"simbad\">{{{{cite web\n" +
 		"  |title=SIMBAD Astronomical Database - CDS (Strasbourg)\n" +
-		"  |work=Results for NGC " + ngc_num + "\n" + 
-		"  |url=" + webpage + "\n" + 
-		"  |accessdate=" + str(self.__obtainActualDate()) + "}}</ref>\n")
+		"  |work=Results for NGC {0}\n" + 
+		"  |url={1}\n" + 
+		"  |accessdate={2}}}}}</ref>").format(ngc_num, webpage,
+				str(self.__obtainActualDate()))
 		return reference
 
 
@@ -95,29 +95,49 @@ class WikiGeneration:
 
 		Author: Andres Linares.
 		Date: 2018-02-14
-		Modified: 2018-03-07 by Andres Linares
+		Modified: 2018-03-08 by Andres Linares
 		Parameters: number of NGC object, basicInfo object, webpage, image
 			file name and reference of the image file name.
 		Returns: String to paste into wikipedia.
 		"""
 		reference = self.__obtainReference(ngc_num, webpage)
-		ref = "<ref name=\"simbad\" />\n"
-		text = "{{Infobox galaxy\n"
-		text = text + "| name = [[New General Catalogue|NGC]] " + ngc_num + "\n"
-		text = text + "| image = " + imageName + "\n"
-		text = text + "| caption = " + imageCaption + "\n"
-		text = text + "| epoch = [[" + basicInfo.getEpoch() + "]]" + reference
-		text = text + "| ra = {{RA|" + basicInfo.getCoordinates()[0] + "|" + basicInfo.getCoordinates()[1] + "|" + basicInfo.getCoordinates()[2] + "}} <ref name=\"simbad\" />\n"
-		text = text + "| dec = {{DEC|" + basicInfo.getCoordinates()[3] + "|" +basicInfo.getCoordinates()[4] + "|" + basicInfo.getCoordinates()[5] + "}} <ref name=\"simbad\" />\n"
-		text = text + "| constellation name = \n"
-		text = (text + "| z = " + basicInfo.getRedShift() + " <ref name=\"simbad\" />\n") if (basicInfo.getRedShift() != "") else text + "| z = \n"																
-		text = (text + "| h_radial_v = {{nowrap|" + basicInfo.getHelioRadialVelocity() + "[[Metre per second|km/s]]}} <ref name=\"simbad\" />\n") if (basicInfo.getHelioRadialVelocity() != "") else text + "| h_radial_v = \n" 
-		text = text + "| gal_v = \n"																			
-		text = text + "| dist_ly = \n"
-		text = (text + "| type = " + basicInfo.getMorphologicalType() + "<ref name=\"simbad\" />\n") if (basicInfo.getMorphologicalType() != "") else text + "| type = \n"
-		text = text + "| size_v = \n"
-		text = text + "| appmag_b = " + basicInfo.getApparentMagnitude() + ref
-		text = text + "| notes = \n"
-		text = text + "| names = " + basicInfo.getOtherNames() + ref
-		text = text + "}}"
+		ref = "<ref name=\"simbad\" />"
+
+		text = ("{{{{Infobox galaxy\n" +
+			"| name = [[New General Catalogue|NGC]] {num}\n" +
+			"| image = {image}\n" +
+			"| caption = {caption}\n" +
+			"| epoch = [[{epoch}]]{reference}\n" +
+			"| ra = {{{{RA{coorRA}}}}}{ref}\n" +
+			"| dec = {{{{DEC{coorDEC}}}}}{ref}\n" +
+			"| constellation name = \n" +
+			"| z = {z}{ref}\n" +
+			"| h_radial_v = {{{{nowrap|{hrv}[[Metre per second|km/s]]}}}}{ref}\n" +
+			"| type = {type}{ref}\n" +
+			"| appmag_b = {b}{ref}" +
+			"| names = {names}{ref}" +
+			"}}}}").format(num = ngc_num, image = imageName,
+				caption = imageCaption, epoch = basicInfo.getEpoch(),
+				reference = reference, ref = ref,
+				coorRA = self.__transformCoordinatesRA(basicInfo.getCoordinates()),
+				coorDEC = self.__transformCoordinatesDEC(basicInfo.getCoordinates()),
+				z = basicInfo.getRedShift(),
+				hrv = basicInfo.getHelioRadialVelocity(),
+				type = basicInfo.getMorphologicalType(),
+				b = basicInfo.getApparentMagnitude(),
+				names = basicInfo.getOtherNames())
+		return text
+
+
+
+	def __transformCoordinatesRA(self, coordinates):
+		text = "|{0}|{1}|{2}".format(coordinates[0], coordinates[1],
+			coordinates[2])
+		return text
+
+
+
+	def __transformCoordinatesDEC(self, coordinates):
+		text = "|{0}|{1}|{2}".format(coordinates[3], coordinates[4],
+			coordinates[5])
 		return text

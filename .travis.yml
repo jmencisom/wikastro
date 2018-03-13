@@ -1,4 +1,7 @@
 language: python
+
 python:
   - '2.7.14'
-script: ./src/test/test.py
+
+script: 
+  - python src/test/test.py

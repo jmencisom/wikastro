@@ -54,7 +54,7 @@ class Image_NGC:
 		indexGreater = 0
 		for x in range(1, len(json)):
 			isGreater = self.__compareDates(greater, json[x]["timestamp"])
-			if(isGreater):
+			if(isGreater and json[x]["title"].endswith(".pdf")==False):
 				greater = json[x]["timestamp"]
 				indexGreater = x
 		return indexGreater

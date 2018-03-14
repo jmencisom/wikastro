@@ -171,11 +171,7 @@ class BasicInfo:
 		"""
 		format_names=names[names.find(",")+1:] #elimina primer nombre (NGC)
 		for ref in self.__namesReferences:
-			#format_names.replace(ref[0], ref[1]) ideal, pero no está funcionando
-			inicio = format_names.find(ref[0])
-			if (inicio>=0):
-				sub1 = format_names[:inicio]
-				format_names = sub1 + ref[1] + format_names[inicio+len(ref[0]):]
+			format_names=format_names.replace(ref[0], ref[1])
 		return format_names
 
 

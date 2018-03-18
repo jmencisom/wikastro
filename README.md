@@ -18,28 +18,23 @@ Automatic Creation of Wiki Content for Astronomical Objects
 ```
 $ virtualenv wikastro-ve
 ```
-
-⋅⋅1. Go to the new directory
+  1. Go to the new directory
 ```
 $ cd wikastro-ve
 ```
-
-⋅⋅1. Load the directory
+  1. Load the directory
 ```
 $ source bin/activate
 ```
-
-1. Clone the repository
+2. Clone the repository
 ```
 $ git clone https://github.com/jmencisom/wikastro.git
 ```
-
-1. Go to directory
+3. Go to directory
 ```
 $ cd wikastro
 ```
-
-1. Install requirements
+4. Install requirements
 ```
 $ pip install -r requirements.txt
 ```

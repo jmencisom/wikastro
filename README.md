@@ -18,11 +18,11 @@ Automatic Creation of Wiki Content for Astronomical Objects
 ```
 $ virtualenv wikastro-ve
 ```
-  1. Go to the new directory
+  1.1. Go to the new directory
 ```
 $ cd wikastro-ve
 ```
-  1. Load the directory
+  1.2. Load the directory
 ```
 $ source bin/activate
 ```

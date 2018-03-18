@@ -3,3 +3,56 @@
 
 # WIKASTRO
 Automatic Creation of Wiki Content for Astronomical Objects
+
+## Getting Started
+
+### Prerequisites
+
+* Python 2.7
+* pip
+* virtualenv (optional)
+
+### Installing
+
+1. Optional: Create a local virtualenv 
+```
+$ virtualenv wikastro-ve
+```
+
+⋅⋅1. Go to the new directory
+```
+$ cd wikastro-ve
+```
+
+⋅⋅1. Load the directory
+```
+$ source bin/activate
+```
+
+1. Clone the repository
+```
+$ git clone https://github.com/jmencisom/wikastro.git
+```
+
+1. Go to directory
+```
+$ cd wikastro
+```
+
+1. Install requirements
+```
+$ pip install -r requirements.txt
+```
+
+## Versioning
+
+We use [Github](http://github.com/) for versioning. For the versions available, see the [https://github.com/jmencisom/wikastro/](https://github.com/jmencisom/wikastro/). 
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+* Astropy
+* Travis CI

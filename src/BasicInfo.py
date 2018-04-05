@@ -63,17 +63,40 @@ class BasicInfo:
 
 
 	def setAttributes(self, attributes):
+		"""
+		Assign the attributes received in the parameters into the
+		attributes from the class and then calls the method obtainValues()
+		in order to get a better organization.
+
+		parameters: attributes obtained from the simbad database.
+		returns: nothing.
+		"""
 		self.__attributes = attributes
 		self.__obtainValues()
 
 
 
 	def getAttributes(self):
+		"""
+		Obtain the attributes from the class and returns it.
+		The variable attributes is the text recieved from the simbad
+		database.
+
+		parameters: nothing.
+		returns: attributes from the class.
+		"""
 		return self.__attributes
 
 
 
 	def getObjectType(self):
+		"""
+		If the object type is not empty, returns its containt. Else, it returns
+		a string that contains just a emptiness.
+
+		parameters: nothing.
+		returns: object type.
+		"""
 		if(self.testEmptiness(self.__objectType, "Object Type")):
 			return ""
 		else:
@@ -82,11 +105,25 @@ class BasicInfo:
 
 
 	def getEpoch(self):
+		"""
+		Returns the epoch of the NGC object, this variable usually contains
+		J2000 epoch.
+
+		parameters: nothing.
+		returns: epoch.
+		"""
 		return self.__epoch
 
 
 
 	def getRightAscension(self):
+		"""
+		Returns the right ascension inside the coordinates of the ngc object.
+		If the variable is empty, then is return an empty string.
+
+		parameters: nothing.
+		returns: right ascension.
+		"""
 		if(self.testEmptiness(self.__rightAscension, "Right Ascension")):
 			return ""
 		else:
@@ -95,6 +132,13 @@ class BasicInfo:
 
 
 	def getDeclination(self):
+		"""
+		Returns the declination inside the coordinates of the ngc object.
+		If the variable is empty, then is return an empty string.
+
+		parameters: nothing.
+		returns: declination.
+		"""
 		if(self.testEmptiness(self.__declination, "Declination")):
 			return ""
 		else:
@@ -103,6 +147,13 @@ class BasicInfo:
 
 
 	def getHelioRadialVelocity(self):
+		"""
+		Returns the helio radial velocity also known as hrv of the ngc object.
+		If the variable is empty, then is return an empty string.
+
+		parameters: nothing.
+		returns: helio radial velocity.
+		"""
 		if(self.testEmptiness(self.__helioRadialVelocity,
 				"Helio Radial Velocity")):
 			return ""
@@ -112,6 +163,13 @@ class BasicInfo:
 
 
 	def getRedShift(self):
+		"""
+		Returns the red shift also known as z of the ngc object.
+		If the variable is empty, then is return an empty string.
+
+		parameters: nothing.
+		returns: red shift.
+		"""
 		if(self.testEmptiness(self.__redShift, "Red Shift")):
 			return ""
 		else:
@@ -120,6 +178,14 @@ class BasicInfo:
 
 
 	def getMorphologicalType(self):
+		"""
+		Returns the morphological type of the ngc object that is usually
+		abreviated by the simbad database as some casual objects like
+		galaxies, stars, etc.
+
+		parameters: nothing.
+		returns: morphological type.
+		"""
 		if(self.testEmptiness(self.__morphologicalType, "Morphological Type")):
 			return ""
 		else:
@@ -128,6 +194,13 @@ class BasicInfo:
 
 
 	def getApparentMagnitude(self):
+		"""
+		Returns the apparent magnitude also known as B of the ngc object.
+		If the variable is empty, then is return an empty string.
+
+		parameters: nothing.
+		returns: morphological type.
+		"""
 		if(self.testEmptiness(self.__apparentMagnitude, "Apparent Magnitude")):
 			return ""
 		else:
@@ -136,6 +209,13 @@ class BasicInfo:
 
 
 	def getOtherNames(self):
+		"""
+		Returns the other names of an ngc object. this variable could contain
+		a lot of different not so known names or could be just one single name.
+
+		parameters: nothing.
+		returns: other names of the ngc object as a string.
+		"""
 		if(self.testEmptiness(self.__otherNames, "Other Names")):
 			return ""
 		else:

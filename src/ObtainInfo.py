@@ -6,6 +6,9 @@ from bs4 import BeautifulSoup
 class ObtainInfo:
 
 	def __init__(self):
+		"""
+		There is no need to initialize the class with any variables.
+		"""
 		pass
 
 

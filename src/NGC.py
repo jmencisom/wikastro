@@ -7,6 +7,13 @@ from WikiGeneration import WikiGeneration
 from ObtainInfo import ObtainInfo
 
 def main():
+	"""
+	This method asks for a number that means the number of a ngc object and
+	and prints the text to paste into wikipedia as a new article.
+
+	parameters: nothing.
+	returns: nothing.
+	"""
 	ngc = "NGC"
 	ngc_num = askObjectNumber()
 	webpage = ""
@@ -29,8 +36,8 @@ def main():
 		wikiGeneration = WikiGeneration()
 		coordinatesTextWiki = wikiGeneration.transformToCoordinatesWiki(
 			basicInfo.getCoordinates())
-		wikibox = wikiGeneration.transformToWikiBox(ngc_num, basicInfo, webpage, imageName,
-			imageCaption)
+		wikibox = wikiGeneration.transformToWikiBox(ngc_num, basicInfo, webpage,
+		 	imageName, imageCaption)
 		extraText = wikiGeneration.generateExtraInfo(ngc_num, webpage)
 
 		print(wikibox)

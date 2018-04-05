@@ -8,6 +8,14 @@ from bs4 import BeautifulSoup
 class Image_NGC:
 
 	def __init__(self, name):
+		"""
+		This class contains two variables that triggers two important
+		procedures. Name is just object of the ngc object and image is the
+		url of an imaged that is hosted in wikimedia commons.
+
+		parameters: name ob the ngc object.
+		returns: nothing.
+		"""
 		self.__name = name
 		self.__image = ""
 
@@ -31,6 +39,13 @@ class Image_NGC:
 
 
 	def getCaption(self, ngc_name):
+		"""
+		Warning: This method is incomplete! Please don't use it until new
+		order.
+
+		parameters: name of the ngc object.
+		returns: name of the telescope that shot the image.
+		"""
 		telescope = ""
 		reference = ("<ref>{{cite web|title=123abc|url=abc123|website=a1b2c3|" +
 			"accessdate=1a2b3c}}</ref>")

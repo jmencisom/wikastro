@@ -7,6 +7,9 @@ class WikiGeneration:
 
 
 	def __init__(self):
+		"""
+		There is no need to initialize the class with any variables.
+		"""
 		pass
 
 
@@ -131,6 +134,13 @@ class WikiGeneration:
 
 
 	def __transformCoordinatesRA(self, coordinates):
+		"""
+		This method receives the coordinates as a list, and the first
+		three positions of this list corresponds to the right ascension.
+
+		parameters: coordinates as a list.
+		returns: string in the format {}|{}|{}
+		"""
 		text = "|{0}|{1}|{2}".format(coordinates[0], coordinates[1],
 			coordinates[2])
 		return text
@@ -138,6 +148,13 @@ class WikiGeneration:
 
 
 	def __transformCoordinatesDEC(self, coordinates):
+		"""
+		This method receives the coordinates as a list, and the
+		last three positions of this list corresponds to the declination.
+
+		parameters: coordinates as a list.
+		returns: string in the format |{}|{}|{}
+		"""
 		text = "|{0}|{1}|{2}".format(coordinates[3], coordinates[4],
 			coordinates[5])
 		return text

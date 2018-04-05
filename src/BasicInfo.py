@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from astropy.coordinates import SkyCoord, get_constellation
 
 class BasicInfo:
 
@@ -156,6 +157,19 @@ class BasicInfo:
 		"""
 		return (self.getRightAscension() + " " + self.getDeclination()).split()
 
+	def getConstellation(self):
+		"""
+		Coming soon...
+
+		"""
+		ra=self.getRightAscension()
+		dec=self.getDeclination()
+		ra2=ra.split(" ")
+		dec2=dec.split(" ")
+		ra=ra2[0]+"h"+ra2[1]+"m"+ra2[2]+"s"
+		dec=dec2[0]+"d"+dec2[1]+"m"+dec2[2]+"s"
+		constellation = SkyCoord(ra, dec, frame='icrs')
+		return get_constellation(constellation)
 
 
 	def formatOtherNames(self, names):

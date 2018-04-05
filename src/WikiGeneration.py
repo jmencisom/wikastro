@@ -110,7 +110,7 @@ class WikiGeneration:
 			"| epoch = [[{epoch}]]{reference}\n" +
 			"| ra = {{{{RA{coorRA}}}}}{ref}\n" +
 			"| dec = {{{{DEC{coorDEC}}}}}{ref}\n" +
-			"| constellation name = \n" +
+			"| constellation name = {const_name}\n" +
 			"| z = {z}{ref}\n" +
 			"| h_radial_v = {{{{nowrap|{hrv}[[Metre per second|km/s]]}}}}{ref}\n" +
 			"| type = {type}{ref}\n" +
@@ -121,6 +121,7 @@ class WikiGeneration:
 				reference = reference, ref = ref,
 				coorRA = self.__transformCoordinatesRA(basicInfo.getCoordinates()),
 				coorDEC = self.__transformCoordinatesDEC(basicInfo.getCoordinates()),
+				const_name = basicInfo.getConstellation(),
 				z = basicInfo.getRedShift(),
 				hrv = basicInfo.getHelioRadialVelocity(),
 				type = basicInfo.getMorphologicalType(),

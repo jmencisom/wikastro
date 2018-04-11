@@ -98,7 +98,7 @@ class WikiGeneration:
 
 		Author: Andres Linares.
 		Date: 2018-02-14
-		Modified: 2018-03-08 by Andres Linares
+		Modified: 2018-04-10 by Lina Mejia
 		Parameters: number of NGC object, basicInfo object, webpage, image
 			file name and reference of the image file name.
 		Returns: String to paste into wikipedia.
@@ -106,19 +106,20 @@ class WikiGeneration:
 		reference = self.__obtainReference(ngc_num, webpage)
 		ref = "<ref name=\"simbad\" />"
 
-		text = ("{{{{Infobox galaxy\n" +
-			"| name = [[New General Catalogue|NGC]] {num}\n" +
-			"| image = {image}\n" +
-			"| caption = {caption}\n" +
-			"| epoch = [[{epoch}]]{reference}\n" +
-			"| ra = {{{{RA{coorRA}}}}}{ref}\n" +
-			"| dec = {{{{DEC{coorDEC}}}}}{ref}\n" +
-			"| constellation name = {const_name}\n" +
-			"| z = {z}{ref}\n" +
-			"| h_radial_v = {{{{nowrap|{hrv}[[Metre per second|km/s]]}}}}{ref}\n" +
-			"| type = {type}{ref}\n" +
-			"| appmag_b = {b}{ref}\n" +
-			"| names = {names}{ref}" +
+		text = ("{{{{Infobox galaxy\n"
+			"| name = [[New General Catalogue|NGC]] {num}\n"
+			"| image = {image}\n"
+			"| caption = {caption}\n"
+			"| epoch = [[{epoch}]]{reference}\n"
+			"| ra = {{{{RA{coorRA}}}}}{ref}\n"
+			"| dec = {{{{DEC{coorDEC}}}}}{ref}\n"
+			"| constellation name = {const_name}\n"
+			"| z = {z}{ref}\n"
+			"| h_radial_v = {{{{nowrap|{hrv}[[Metre per second|km/s]]}}}}{ref}\n"
+			"| type = {type}{ref}\n"
+			"| appmag_b = {b}{ref}\n"
+			"| dist_ly = {distance} [light-year|ly]\n"
+			"| names = {names}{ref}\n"
 			"}}}}").format(num = ngc_num, image = imageName,
 				caption = imageCaption, epoch = basicInfo.getEpoch(),
 				reference = reference, ref = ref,
@@ -129,6 +130,7 @@ class WikiGeneration:
 				hrv = basicInfo.getHelioRadialVelocity(),
 				type = basicInfo.getMorphologicalType(),
 				b = basicInfo.getApparentMagnitude(),
+				distance = basicInfo.getDistance(),
 				names = basicInfo.getOtherNames())
 		return text
 

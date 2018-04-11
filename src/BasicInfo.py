@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from astropy.coordinates import SkyCoord, get_constellation
+from astropy import units as u
+from astropy.cosmology import WMAP9 as cosmo
+from astropy.coordinates import Distance
 
 class BasicInfo:
 
@@ -237,6 +240,8 @@ class BasicInfo:
 		"""
 		return (self.getRightAscension() + " " + self.getDeclination()).split()
 
+
+
 	def getConstellation(self):
 		"""
 		Coming soon...
@@ -250,6 +255,25 @@ class BasicInfo:
 		dec=dec2[0]+"d"+dec2[1]+"m"+dec2[2]+"s"
 		constellation = SkyCoord(ra, dec, frame='icrs')
 		return get_constellation(constellation)
+
+
+
+	def getDistance(self):
+		"""
+		This method returns the distance of the object.
+
+		Author: Lina Leon.
+		Date: 2018-04-08
+		Modified: Never.
+		Parameters: Nothing.
+		Returns: Float with the distance of the object in lightyears units.
+		"""
+
+		r = float(self.getRedShift())
+		d2 = Distance(cosmo.comoving_distance(r), u.lightyear)
+
+		return d2
+
 
 
 	def formatOtherNames(self, names):

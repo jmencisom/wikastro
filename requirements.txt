@@ -30,4 +30,6 @@ Pygments==2.2.0
 pyparsing==2.2.0
 pytest==3.4.2
 pytz==2018.3
+pywin32-ctypes==0.1.2
+scipy==1.0.1
 six==1.11.0

@@ -273,7 +273,7 @@ class BasicInfo:
 		d2 = Distance(cosmo.comoving_distance(r), u.lightyear)
 		value = float(str(d2).split()[0])
 		divided = value / 1000000 #1 million
-		if divided > 0:
+		if divided > 1:
 			return "{:.2f} M".format(divided)
 		else:
 			return "{:.2f} ".format(value)

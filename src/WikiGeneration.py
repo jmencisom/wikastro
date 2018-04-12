@@ -118,7 +118,7 @@ class WikiGeneration:
 			"| h_radial_v = {{{{nowrap|{hrv}[[Metre per second|km/s]]}}}}{ref}\n"
 			"| type = {type}{ref}\n"
 			"| appmag_b = {b}{ref}\n"
-			"| dist_ly = {distance} [light-year|ly]\n"
+			"| dist_ly = {distance}[light-year|ly]\n"
 			"| names = {names}{ref}\n"
 			"}}}}").format(num = ngc_num, image = imageName,
 				caption = imageCaption, epoch = basicInfo.getEpoch(),

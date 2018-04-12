@@ -264,7 +264,7 @@ class BasicInfo:
 
 		Author: Lina Leon.
 		Date: 2018-04-08
-		Modified: Never.
+		Modified: 2018-04-12 by Andres Linares
 		Parameters: Nothing.
 		Returns: Float with the distance of the object in lightyears units.
 		"""
@@ -276,7 +276,7 @@ class BasicInfo:
 		if divided > 0:
 			return "{:.2f} M".format(divided)
 		else:
-			return "{:.2f} ".format(divided)
+			return "{:.2f} ".format(value)
 
 
 

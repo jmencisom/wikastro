@@ -16,12 +16,12 @@ def main():
 	"""
 	ngc = "NGC"
 	ngc_num = askObjectNumber()
-	webpage = ""
 
 	ngc_num = str(ngc_num)
 	ngc_nomb = ngc + " " + ngc_num
 	print("\nobject: " + ngc_nomb)
 
+	webpage = ""
 	try:
 		print("\nSearching object in database...\n")
 		obtainInfo = ObtainInfo()
@@ -29,6 +29,7 @@ def main():
 		text_basicInfo = obtainInfo.getValues(soup)
 
 		basicInfo = BasicInfo(text_basicInfo)
+		
 		image = Image_NGC(ngc_nomb)
 		imageName = image.getImage()
 		imageCaption = image.getCaption(ngc_nomb)
@@ -36,12 +37,15 @@ def main():
 		wikiGeneration = WikiGeneration()
 		coordinatesTextWiki = wikiGeneration.transformToCoordinatesWiki(
 			basicInfo.getCoordinates())
+		fatherPageTextWiki = wikiGeneration.generateFatherPage(
+			basicInfo.getObjectType())
 		wikibox = wikiGeneration.transformToWikiBox(ngc_num, basicInfo, webpage,
 		 	imageName, imageCaption)
 		extraText = wikiGeneration.generateExtraInfo(ngc_num, webpage)
 
-		print(wikibox)
 		print(coordinatesTextWiki)
+		print(wikibox)
+		print(fatherPageTextWiki)
 		print(extraText)
 	except IOError as err:
 		print ("\nCan not connect to Internet.\n")

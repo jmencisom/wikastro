@@ -19,6 +19,7 @@ class BasicInfo:
 		"""
 		self.__attributes = attributes
 		self.__objectType = ""
+		self.__nombre=""
 		self.__epoch = "J2000"
 		self.__rightAscension = ""
 		self.__declination = ""
@@ -55,6 +56,7 @@ class BasicInfo:
 		Returns: Nothing.
 		"""
 		separatedText = self.__attributes.split("|")
+		self.__nombre = separatedText[0]
 		self.__objectType = separatedText[3]
 		self.__rightAscension = separatedText[1]
 		self.__declination = separatedText[2]

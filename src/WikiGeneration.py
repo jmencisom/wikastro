@@ -24,10 +24,82 @@ class WikiGeneration:
 		Parameters: number of NGC object and url.
 		Returns: String with external links for wikipedia.
 		"""
-		text = ("==External links==\n*[{0} NGC {num} on SIMBAD]\n" +
-			"[[Category:NGC objects|{num}]]").format(webpage, num = ngc_num)
+		text = ("\n==External links==\n*[{0} NGC {num} on SIMBAD]\n"+
+				"\n==References==\n"+
+				"\n[[Category:NGC objects|{num}]]\n").format(webpage, num = ngc_num)
 		return text
 
+	def generateFatherPage(self, objectType):
+		"""
+		It generates to see also the section, from the relation 
+		of simbad objects and wikipedia
+	 
+		Author: Luis Carlos Martinez
+		Date: 2018-04-20
+		odified: Never.
+		Parameters: objectType.
+		Returns: String with see also.
+		"""
+		objectt=[[" Association Of Stars","Template Star"],
+				[" Herbig Ae/Be Star","Template Nebula"],
+				[" Star Forming Region","Template Nebula"],
+				[" Emission Object","Template Nebula"],
+				[" Cluster Of Stars","Template Open Cluster"],
+				[" Double Or Multiple Star","Template Star"],
+				[" Reflection Nebula","Template Nebula"],
+				[" Liner-Type Active Galaxy Nucleus","Template Galaxy"],
+				[" Seyfert 2 Galaxy","Template Galaxy"],
+				[" Galaxy in Cluster Of Galaxies","Template Galaxy"],
+				[" Galaxy","Template Galaxy"],
+				[" Brightest Galaxy In A Cluster (Bcg)","Template Galaxy"],
+				[" Open (Galactic) Cluster","Template Open Cluster"],
+				[" Globular Cluster","Template Globular Cluster"],
+				[" Herbig-Haro Object","Template Nebula"],
+				[" Interacting Galaxies","Template Galaxy"],
+				[" Galaxy in Pair of Galaxies","Template Galaxy"],
+				[" Hii Galaxy","Template Galaxy"],
+				[" Radio Galaxy","Template Galaxy"],
+				[" Low Surface Brightness Galaxy","Template Galaxy"],
+				[" Pair Of Galaxies","Template Galaxy"],
+				[" Hii (Ionized) Region","Template Nebula"],
+				[" Bright Nebula","Template Nebula"],
+				[" Blazar","Template Galaxy"],
+				[" Blue Compact Galaxy","Template Galaxy"],
+				[" Emission-Line Star","Template Star"],
+				[" Galactic Nebula","Template Nebula"],
+				[" Galaxy in Group of Galaxies","Template Galaxy"],
+				[" Group Of Galaxies","Template Galaxy Cluster"],
+				[" Molecular Cloud","Template Nebulosa"],
+				[" Moving Group","Template Open Cluster"],
+				[" Nova","Template Star"],
+				[" Part Of A Galaxy","Template Galaxy"],
+				[" Possible (Open) Star Cluster","Template Star"],
+				[" Possible Quasar","Template Galaxy"],
+				[" Spectroscopic Binary","Template Star"],
+				[" Variable Star Of Orion Type","Template Star"],
+				[" Interstellar Matter","Template Nebula"],
+				[" Object Of Unknown Nature","Template Open Cluster"],
+				[" Planetary Nebula","Template Nebula"],
+				[" Seyfert Galaxy","Template Galaxy"],
+				[" Seyfert 1 Galaxy","Template Galaxy"],
+				[" Emission-Line Galaxy","Template Galaxy"],
+				[" Active Galaxy Nucleus","Template Galaxy"],
+				[" Starburst Galaxy","Template Galaxy"],
+				[" Quasar","Template Galaxy"],
+				[" Star","Template Star"],
+				[" Supernova Remnant","Template Nebula"]]
+
+		x=0	
+		while x < 48 :
+			if objectt[x][0] == objectType:
+				text = objectt[x][1]
+				x=48
+			if x == 47 :
+				text = ""
+			x += 1
+		text = ("\n==See also==\n"+"*[["+text+"]]\n")
+
+		return text
 
 
 	def __obtainReference(self, ngc_num, webpage):
@@ -80,13 +152,14 @@ class WikiGeneration:
 			        and declination in last three.
 		Returns: String to inject into wikipedia.
 		"""
+
 		text = "{{Sky|"
 		for x in range(0, 6):
 			text = text + coordinates[x]
 			text = text + "|"
 			if x == 2:
 				text = text + "|"
-		text = text + "999}}"
+		text = text + "999}}\n"
 		return text
 
 
@@ -120,6 +193,7 @@ class WikiGeneration:
 			"| appmag_b = {b}{ref}\n"
 			"| dist_ly = {distance}[light-year|ly]\n"
 			"| names = {names}{ref}\n"
+			"| objectType ={objectType}{ref}\n"
 			"}}}}").format(num = ngc_num, image = imageName,
 				caption = imageCaption, epoch = basicInfo.getEpoch(),
 				reference = reference, ref = ref,
@@ -131,7 +205,8 @@ class WikiGeneration:
 				type = basicInfo.getMorphologicalType(),
 				b = basicInfo.getApparentMagnitude(),
 				distance = basicInfo.getDistance(),
-				names = basicInfo.getOtherNames())
+				names = basicInfo.getOtherNames(),
+				objectType = basicInfo.getObjectType())
 		return text
 
 

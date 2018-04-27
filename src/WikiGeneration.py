@@ -28,9 +28,10 @@ class WikiGeneration:
 		x=(x+1)*5;
 		if objec != "Galaxy":
 			objec = ""
-		text = ("==External links==\n*[{0} NGC {num} on SIMBAD]\n\n==References==\n"
-				+"[[Category:NGC objects|{num}]]\n\n{{{{commonscat}}}}\n{{{{{Type}}}}}\n"
-				+"{{{{Ngc{x}}}}}").format(webpage, num = ngc_num, Type = objec, x=x)
+		text = ("==External links==\n*[{0} NGC {num} on SIMBAD]\n\n==References"
+				+"==\n{{{{reflist}}}}\n[[Category:NGC objects|{num}]]\n"
+				+"\n{{{{commonscat}}}}\n{{{{{Type}}}}}\n{{{{Ngc{x}}}}}"
+				).format(webpage, num = ngc_num,Type = objec, x=x)
 		
 		
 

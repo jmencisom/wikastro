@@ -37,11 +37,11 @@ def main():
 		wikiGeneration = WikiGeneration()
 		coordinatesTextWiki = wikiGeneration.transformToCoordinatesWiki(
 			basicInfo.getCoordinates())
-		fatherPageTextWiki = wikiGeneration.generateFatherPage(
+		fatherPageTextWiki, objec = wikiGeneration.generateFatherPage(
 			basicInfo.getObjectType())
 		wikibox = wikiGeneration.transformToWikiBox(ngc_num, basicInfo, webpage,
 		 	imageName, imageCaption)
-		extraText = wikiGeneration.generateExtraInfo(ngc_num, webpage)
+		extraText = wikiGeneration.generateExtraInfo(ngc_num, webpage, objec)
 
 		print(coordinatesTextWiki)
 		print(wikibox)

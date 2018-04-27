@@ -14,7 +14,7 @@ class WikiGeneration:
 
 
 
-	def generateExtraInfo(self, ngc_num, webpage):
+	def generateExtraInfo(self, ngc_num, webpage, objec):
 		"""
 		Generates external links section.
 	 
@@ -24,9 +24,16 @@ class WikiGeneration:
 		Parameters: number of NGC object and url.
 		Returns: String with external links for wikipedia.
 		"""
-		text = ("\n==External links==\n*[{0} NGC {num} on SIMBAD]\n"+
-				"\n==References==\n"+
-				"\n[[Category:NGC objects|{num}]]\n").format(webpage, num = ngc_num)
+		x=int(int(ngc_num)-1)/500
+		x=(x+1)*5;
+		if objec != "Galaxy":
+			objec = ""
+		text = ("==External links==\n*[{0} NGC {num} on SIMBAD]\n\n==References==\n"
+				+"[[Category:NGC objects|{num}]]\n\n{{{{commonscat}}}}\n{{{{{Type}}}}}\n"
+				+"{{{{Ngc{x}}}}}").format(webpage, num = ngc_num, Type = objec, x=x)
+		
+		
+
 		return text
 
 	def generateFatherPage(self, objectType):
@@ -40,54 +47,54 @@ class WikiGeneration:
 		Parameters: objectType.
 		Returns: String with see also.
 		"""
-		objectt=[[" Association Of Stars","Template Star"],
-				[" Herbig Ae/Be Star","Template Nebula"],
-				[" Star Forming Region","Template Nebula"],
-				[" Emission Object","Template Nebula"],
-				[" Cluster Of Stars","Template Open Cluster"],
-				[" Double Or Multiple Star","Template Star"],
-				[" Reflection Nebula","Template Nebula"],
-				[" Liner-Type Active Galaxy Nucleus","Template Galaxy"],
-				[" Seyfert 2 Galaxy","Template Galaxy"],
-				[" Galaxy in Cluster Of Galaxies","Template Galaxy"],
-				[" Galaxy","Template Galaxy"],
-				[" Brightest Galaxy In A Cluster (Bcg)","Template Galaxy"],
-				[" Open (Galactic) Cluster","Template Open Cluster"],
-				[" Globular Cluster","Template Globular Cluster"],
-				[" Herbig-Haro Object","Template Nebula"],
-				[" Interacting Galaxies","Template Galaxy"],
-				[" Galaxy in Pair of Galaxies","Template Galaxy"],
-				[" Hii Galaxy","Template Galaxy"],
-				[" Radio Galaxy","Template Galaxy"],
-				[" Low Surface Brightness Galaxy","Template Galaxy"],
-				[" Pair Of Galaxies","Template Galaxy"],
-				[" Hii (Ionized) Region","Template Nebula"],
-				[" Bright Nebula","Template Nebula"],
-				[" Blazar","Template Galaxy"],
-				[" Blue Compact Galaxy","Template Galaxy"],
-				[" Emission-Line Star","Template Star"],
-				[" Galactic Nebula","Template Nebula"],
-				[" Galaxy in Group of Galaxies","Template Galaxy"],
-				[" Group Of Galaxies","Template Galaxy Cluster"],
-				[" Molecular Cloud","Template Nebulosa"],
-				[" Moving Group","Template Open Cluster"],
-				[" Nova","Template Star"],
-				[" Part Of A Galaxy","Template Galaxy"],
-				[" Possible (Open) Star Cluster","Template Star"],
-				[" Possible Quasar","Template Galaxy"],
-				[" Spectroscopic Binary","Template Star"],
-				[" Variable Star Of Orion Type","Template Star"],
-				[" Interstellar Matter","Template Nebula"],
-				[" Object Of Unknown Nature","Template Open Cluster"],
-				[" Planetary Nebula","Template Nebula"],
-				[" Seyfert Galaxy","Template Galaxy"],
-				[" Seyfert 1 Galaxy","Template Galaxy"],
-				[" Emission-Line Galaxy","Template Galaxy"],
-				[" Active Galaxy Nucleus","Template Galaxy"],
-				[" Starburst Galaxy","Template Galaxy"],
-				[" Quasar","Template Galaxy"],
-				[" Star","Template Star"],
-				[" Supernova Remnant","Template Nebula"]]
+		objectt=[[" Association of Stars","Star"],
+				[" Herbig Ae/Be Star","Nebula"],
+				[" Star Forming Region","Nebula"],
+				[" Emission Object","Nebula"],
+				[" Cluster of Stars","Open Cluster"],
+				[" Double or Multiple Star","Star"],
+				[" Reflection Nebula","Nebula"],
+				[" Liner-Type Active Galaxy Nucleus","Galaxy"],
+				[" Seyfert 2 Galaxy","Galaxy"],
+				[" Galaxy in Cluster of Galaxies","Galaxy"],
+				[" Galaxy","Galaxy"],
+				[" Brightest Galaxy in A Cluster (Bcg)","Galaxy"],
+				[" Open (Galactic) Cluster","Open Cluster"],
+				[" Globular Cluster","Globular Cluster"],
+				[" Herbig-Haro Object","Nebula"],
+				[" Interacting Galaxies","Galaxy"],
+				[" Galaxy in Pair of Galaxies","Galaxy"],
+				[" Hii Galaxy","Galaxy"],
+				[" Radio Galaxy","Galaxy"],
+				[" Low Surface Brightness Galaxy","Galaxy"],
+				[" Pair of Galaxies","Galaxy"],
+				[" Hii (Ionized) Region","Nebula"],
+				[" Bright Nebula","Nebula"],
+				[" Blazar","Galaxy"],
+				[" Blue Compact Galaxy","Galaxy"],
+				[" Emission-Line Star","Star"],
+				[" Galactic Nebula","Nebula"],
+				[" Galaxy in Group of Galaxies","Galaxy"],
+				[" Group of Galaxies","Galaxy Cluster"],
+				[" Molecular Cloud","Nebulosa"],
+				[" Moving Group","Open Cluster"],
+				[" Nova","Star"],
+				[" Part of A Galaxy","Galaxy"],
+				[" Possible (Open) Star Cluster","Star"],
+				[" Possible Quasar","Galaxy"],
+				[" Spectroscopic Binary","Star"],
+				[" Variable Star of Orion Type","Star"],
+				[" Interstellar Matter","Nebula"],
+				[" Object of Unknown Nature","Open Cluster"],
+				[" Planetary Nebula","Nebula"],
+				[" Seyfert Galaxy","Galaxy"],
+				[" Seyfert 1 Galaxy","Galaxy"],
+				[" Emission-Line Galaxy","Galaxy"],
+				[" Active Galaxy Nucleus","Galaxy"],
+				[" Starburst Galaxy","Galaxy"],
+				[" Quasar","Galaxy"],
+				[" Star","Star"],
+				[" Supernova Remnant"," Nebula"]]
 
 		x=0	
 		while x < 48 :
@@ -97,9 +104,10 @@ class WikiGeneration:
 			if x == 47 :
 				text = ""
 			x += 1
-		text = ("\n==See also==\n"+"*[["+text+"]]\n")
+		objec = text
+		text = ("\n==See also==\n*[[{text}]]\n").format(text = text )
 
-		return text
+		return text,objec
 
 
 	def __obtainReference(self, ngc_num, webpage):
@@ -193,7 +201,6 @@ class WikiGeneration:
 			"| appmag_b = {b}{ref}\n"
 			"| dist_ly = {distance}[light-year|ly]\n"
 			"| names = {names}{ref}\n"
-			"| objectType ={objectType}{ref}\n"
 			"}}}}").format(num = ngc_num, image = imageName,
 				caption = imageCaption, epoch = basicInfo.getEpoch(),
 				reference = reference, ref = ref,
@@ -205,8 +212,7 @@ class WikiGeneration:
 				type = basicInfo.getMorphologicalType(),
 				b = basicInfo.getApparentMagnitude(),
 				distance = basicInfo.getDistance(),
-				names = basicInfo.getOtherNames(),
-				objectType = basicInfo.getObjectType())
+				names = basicInfo.getOtherNames())
 		return text
 
 

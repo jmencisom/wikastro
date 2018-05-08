@@ -2,13 +2,13 @@
 [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/)
 
 # WIKASTRO
-Automatic Creation of Wiki Content for Astronomical Objects
+This is a project that pretend to enrich the information of the free encyclopedia Wikipedia, using the Web scraping data extraction technique on reliable websites such as the astronomical Simbad database  (http://simbad.u-strasbg.fr/simbad)/), where, by a website, is possible type the corresponding numbering to the required item and this will show a template with the data obtained, where the user will approve the modification of the information on the Wikipedia website.
 
 ## Getting Started
 
 ### Prerequisites
 
-* Python 2.7
+* Python 2.7.14
 * pip
 * virtualenv (optional)
 

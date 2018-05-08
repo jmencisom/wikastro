@@ -2,7 +2,7 @@
 [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/)
 
 # WIKASTRO
-This is a project that pretend to enrich the information of the free encyclopedia Wikipedia, using the Web scraping data extraction technique on reliable websites such as the astronomical Simbad database  (http://simbad.u-strasbg.fr/simbad)/), where, by a website, is possible type the corresponding numbering to the required item and this will show a template with the data obtained, where the user will approve the modification of the information on the Wikipedia website.
+Wikastro enriches the information on astronomical objects available at the free encyclopedia Wikipedia. It uses web scraping to extract data from reliable websites such as [http://simbad.u-strasbg.fr/simbad/](UDS/CNRS Simbad), [http://adsabs.harvard.edu/](SAO/NASA ADS), among others. Users add the resulting page by hand to the encyclopedia. The result uses the respective format, multimedia and supporting references.
 
 ## Getting Started
 

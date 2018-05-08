@@ -2,7 +2,7 @@
 [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/)
 
 # WIKASTRO
-Wikastro enriches the information on astronomical objects available at the free encyclopedia Wikipedia. It uses web scraping to extract data from reliable websites such as [http://simbad.u-strasbg.fr/simbad/](UDS/CNRS Simbad), [http://adsabs.harvard.edu/](SAO/NASA ADS), among others. Users add the resulting page by hand to the encyclopedia. The result uses the respective format, multimedia and supporting references.
+Wikastro enriches the information on astronomical objects available at the free encyclopedia Wikipedia. It uses web scraping to extract data from reliable websites such as [UDS/CNRS Simbad](http://simbad.u-strasbg.fr/simbad/), [SAO/NASA ADS](http://adsabs.harvard.edu/), among others. Users add the resulting page by hand to the encyclopedia. The result uses the respective format, multimedia and supporting references.
 
 ## Getting Started
 

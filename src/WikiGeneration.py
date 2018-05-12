@@ -180,7 +180,7 @@ class WikiGeneration:
 
 		Author: Andres Linares.
 		Date: 2018-02-14
-		Modified: 2018-04-10 by Lina Mejia
+		Modified: 2018-05-11 by Lina Mejia
 		Parameters: number of NGC object, basicInfo object, webpage, image
 			file name and reference of the image file name.
 		Returns: String to paste into wikipedia.
@@ -201,7 +201,9 @@ class WikiGeneration:
 			"| type = {type}{ref}\n"
 			"| appmag_b = {b}{ref}\n"
 			"| dist_ly = {distance}[light-year|ly]\n"
-			"| names = {names}{ref}\n"
+			"| discoverer = {discovery[0]}\n"
+			"| year of discovery = {discovery[1]}\n"			
+			"| names = {names}{ref}"
 			"}}}}").format(num = ngc_num, image = imageName,
 				caption = imageCaption, epoch = basicInfo.getEpoch(),
 				reference = reference, ref = ref,
@@ -213,6 +215,7 @@ class WikiGeneration:
 				type = basicInfo.getMorphologicalType(),
 				b = basicInfo.getApparentMagnitude(),
 				distance = basicInfo.getDistance(),
+				discovery = basicInfo.getDiscovererAndYear(ngc_num),
 				names = basicInfo.getOtherNames())
 		return text
 

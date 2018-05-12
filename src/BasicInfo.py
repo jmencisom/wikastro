@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+import os
+import urllib as url_op
+import xlrd
 from astropy.coordinates import SkyCoord, get_constellation
 from astropy import units as u
 from astropy.cosmology import WMAP9 as cosmo
@@ -266,20 +270,47 @@ class BasicInfo:
 
 		Author: Lina Leon.
 		Date: 2018-04-08
-		Modified: 2018-04-12 by Andres Linares
+		Modified: 2018-05-11 by Lina Mejia
 		Parameters: Nothing.
 		Returns: Float with the distance of the object in lightyears units.
 		"""
 
-		r = float(self.getRedShift())
-		d2 = Distance(cosmo.comoving_distance(r), u.lightyear)
-		value = float(str(d2).split()[0])
-		divided = value / 1000000 #1 million
-		if divided > 1:
-			return "{:.2f} M".format(divided)
+		
+		if (self.getRedShift() != ""):
+			r = float(self.getRedShift())
+			d2 = Distance(cosmo.comoving_distance(r), u.lightyear)
+			value = float(str(d2).split()[0])
+			divided = value / 1000000 #1 million
+			if divided > 1:
+				return "{:.2f} M".format(divided)
+			else:
+				return "{:.2f} ".format(value)
 		else:
-			return "{:.2f} ".format(value)
+			return ""
 
+
+
+	def getDiscovererAndYear(self,ngc_num):
+		"""
+ 		This method returns the discoverer of the object and the
+        year it was discovered.
+
+        Author: Lina Leon.
+        Date: 2018-05-11
+        Modified: Never.
+        Parameters: the number of the object required.
+        Returns: two Strings that contains the discoverer and the year
+        respectively.
+		"""
+		self.ngc_num = int(ngc_num)+8
+		page = 'http://ngcicproject.org/public_HCNGC/Public_HCNGC.xls'
+		url_op.urlretrieve(page, "info.xls")
+		workbook = xlrd.open_workbook("info.xls")
+		sheet = workbook.sheet_by_index(0)
+		discoverer = sheet.cell_value(self.ngc_num,9)
+		year = int(sheet.cell_value(self.ngc_num,10))
+		os.remove("info.xls")
+		return [discoverer, year]
 
 
 	def formatOtherNames(self, names):

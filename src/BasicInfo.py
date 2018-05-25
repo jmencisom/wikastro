@@ -2,7 +2,6 @@
 
 import os
 import urllib as url_op
-import xlrd
 from astropy.coordinates import SkyCoord, get_constellation
 from astropy import units as u
 from astropy.cosmology import WMAP9 as cosmo
@@ -291,18 +290,31 @@ class BasicInfo:
 
         
         :Param: the number of the object required.
-        :Returns: two Strings that contains the discoverer and the year
-        respectively.
+        :Returns: String array of two positions that contains the discoverer and
+         the year respectively.
 		:rtype: String
 		"""
-		self.ngc_num = int(ngc_num)+8
-		page = 'http://ngcicproject.org/public_HCNGC/Public_HCNGC.xls'
-		url_op.urlretrieve(page, "info.xls")
-		workbook = xlrd.open_workbook("info.xls")
-		sheet = workbook.sheet_by_index(0)
-		discoverer = sheet.cell_value(self.ngc_num,9)
-		year = int(sheet.cell_value(self.ngc_num,10))
-		os.remove("info.xls")
+		discoverer=""
+		year=""
+		try:
+			if(os.path.exists('.\src\info.txt')):
+				pass
+			else:
+				page = 'http://ngcicproject.org/public_HCNGC/DPublic_HCNGC.txt'
+				url_op.urlretrieve(page, ".\src\info.txt")
+
+			self.ngc_num = int(ngc_num)+9
+			archivo = open(".\src\info.txt")
+			cont=0
+
+			while  cont!=self.ngc_num:
+					linea=archivo.readline()	
+					cont+=1
+			arr = linea.split("|")
+			discoverer = arr[9]
+			year = arr[10]
+		except:
+			print "Error found"
 		return [discoverer, year]
 
 

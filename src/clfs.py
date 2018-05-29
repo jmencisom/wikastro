@@ -17,7 +17,7 @@ class clfs:
       :Param: self class.
       :Returns: Nothing.
       """
-      self.__filename_ngc_clf = '../files/ngc_clf'
+      self.__filename_ngc_clf = '../files/ngc_clf.tr'
       self.__fileobject_ngc_clf = open(self.__filename_ngc_clf, 'wb')
 
 

@@ -2,7 +2,7 @@
 
 import sys
 import NGC
-import clfs
+from clfs import clfs
 
 def main(argv):
 	"""
@@ -25,11 +25,17 @@ def main(argv):
 	elif(len(argv) == 2):
 		if(argv[0].upper() == "--NGC" and argv[1].upper() == "--TRAIN"):
 			clf = clfs()
-			clf.__train_ngc()
+			clf.train_ngc()
 	else:
 		print("Please use an option. For more information type --help")
 
 def print_help():
+	"""
+	Prints the help of the script by command line.
+
+	:Param: nothing.
+	:Returns: nothing.
+	"""
 	print("""
 Usage: python wikastro.py [option]
 Options:

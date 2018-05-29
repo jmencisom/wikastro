@@ -73,8 +73,3 @@ def askObjectNumber():
 				print("Input must be positive and greater than zero.\n")
 		except (ValueError, NameError, SyntaxError):
 			print("Input must be a number.\n")
-
-
-
-if __name__ == "__main__":
-	main()

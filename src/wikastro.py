@@ -37,14 +37,16 @@ def print_help():
 	:Returns: nothing.
 	"""
 	print("""
-Usage: python wikastro.py [option]
+Usage: python wikastro.py [option] [parameter]
 Options:
 --version: shows the version of the script.
 --help: shows this message.
 --ngc: runs NGC.py script.
 -v: same as '--version'
 -h: same as '--help'
-		""")
+Parameters:
+--train: when '--ngc' is the option, you can type this parameter to train the classifier.
+""")
 
 if __name__ == "__main__":
 	main(sys.argv[1:])

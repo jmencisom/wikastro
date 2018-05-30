@@ -297,19 +297,21 @@ class BasicInfo:
 		discoverer=""
 		year=""
 		try:
-			if(os.path.exists('.\src\info.txt')):
+			if(os.path.exists('info.txt')):
 				pass
 			else:
 				page = 'http://ngcicproject.org/public_HCNGC/DPublic_HCNGC.txt'
-				url_op.urlretrieve(page, ".\src\info.txt")
+				url_op.urlretrieve(page, "info.txt")
+
 
 			self.ngc_num = int(ngc_num)+9
-			archivo = open(".\src\info.txt")
+			archivo = open("info.txt")
 			cont=0
 
-			while  cont!=self.ngc_num:
+			while  cont != self.ngc_num:
 					linea=archivo.readline()	
 					cont+=1
+
 			arr = linea.split("|")
 			discoverer = arr[9]
 			year = arr[10]

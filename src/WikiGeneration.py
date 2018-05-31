@@ -109,8 +109,10 @@ class WikiGeneration:
 		return text, objec
 
 
-	def generateAbstract(self, ngc_num):
-		text = "\n'''NGC {}''' is a \n".format(ngc_num)
+	def generateAbstract(self, ngc_num, basicInfo):
+		text = ("\n'''NGC {}''',  also occasionally referred to as" +
+			"'''[[]]'''\n").format(ngc_num)
+		print(basicInfo.getOtherNames())
 		return text
 
 

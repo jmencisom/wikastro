@@ -42,7 +42,7 @@ def main():
 		wikibox = wikiGeneration.transformToWikiBox(ngc_num, basicInfo, webpage,
 		 	imageName, imageCaption)
 		extraText = wikiGeneration.generateExtraInfo(ngc_num, webpage, objec)
-		abstract = wikiGeneration.generateAbstract(ngc_num)
+		abstract = wikiGeneration.generateAbstract(ngc_num, basicInfo)
 		observation = wikiGeneration.generateObservation()
 		structure = wikiGeneration.generateStructure()
 

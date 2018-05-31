@@ -106,7 +106,22 @@ class WikiGeneration:
 		objec = text
 		text = ("\n==See also==\n*[[{text}]]\n").format(text = text )
 
-		return text,objec
+		return text, objec
+
+
+	def generateAbstract(self, ngc_num):
+		text = "\n'''NGC {}''' is a \n".format(ngc_num)
+		return text
+
+
+	def generateObservation(self):
+		text = "\n== Observation ==\n"
+		return text
+
+
+	def generateStructure(self):
+		text = "\n== Structure ==\n"
+		return text
 
 
 	def __obtainReference(self, ngc_num, webpage):

@@ -42,9 +42,15 @@ def main():
 		wikibox = wikiGeneration.transformToWikiBox(ngc_num, basicInfo, webpage,
 		 	imageName, imageCaption)
 		extraText = wikiGeneration.generateExtraInfo(ngc_num, webpage, objec)
+		abstract = wikiGeneration.generateAbstract(ngc_num)
+		observation = wikiGeneration.generateObservation()
+		structure = wikiGeneration.generateStructure()
 
 		print(coordinatesTextWiki)
 		print(wikibox)
+		print(abstract)
+		print(observation)
+		print(structure)
 		print(fatherPageTextWiki)
 		print(extraText)
 	except IOError as err:

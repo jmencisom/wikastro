@@ -32,7 +32,7 @@ class clfs:
       :Param: self class.
       :Returns: nothing.
       """
-      dataset = pd.read_csv('../files/training.csv', delimiter=';',
+      dataset = pd.read_csv('../files/training.csv', delimiter=',',
          header=None, names=['phrase', 'target'])
       print(dataset)
       text_clf = Pipeline([('vect', CountVectorizer()),

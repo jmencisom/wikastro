@@ -52,3 +52,17 @@ class clfs:
       """
       clf = pickle.load(self.__fileobject_ngc_clf)
       return clf
+
+
+
+   def predicText(self, text):
+      """
+      Predict the text received by parameter into one of three categories:
+      abstract, observation or structure.
+
+      :Param: self class and text to predict.
+      :Returns: Predicted category as text.
+      """
+      clf = self.get_clf_ngc()
+      result = clf.predict(text)
+      return result[0]

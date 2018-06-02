@@ -34,6 +34,7 @@ def main():
 		imageName = image.getImage()
 		imageCaption = image.getCaption(ngc_nomb)
 
+
 		wikiGeneration = WikiGeneration()
 		coordinatesTextWiki = wikiGeneration.transformToCoordinatesWiki(
 			basicInfo.getCoordinates())
@@ -41,8 +42,9 @@ def main():
 			basicInfo.getObjectType())
 		wikibox = wikiGeneration.transformToWikiBox(ngc_num, basicInfo, webpage,
 		 	imageName, imageCaption)
+
 		extraText = wikiGeneration.generateExtraInfo(ngc_num, webpage, objec)
-		abstract = wikiGeneration.generateAbstract(ngc_num, basicInfo)
+		abstract = wikiGeneration.generateAbstract(ngc_num, basicInfo, objec)
 		observation = wikiGeneration.generateObservation()
 		structure = wikiGeneration.generateStructure()
 

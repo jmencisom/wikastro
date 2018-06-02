@@ -109,10 +109,13 @@ class WikiGeneration:
 		return text, objec
 
 
-	def generateAbstract(self, ngc_num, basicInfo):
-		text = ("\n'''NGC {}''',  also occasionally referred to as" +
-			"'''[[]]'''\n").format(ngc_num)
-		print(basicInfo.getOtherNames())
+	def generateAbstract(self, ngc_num, basicInfo, objec):
+		text = ("\n'''NGC {ngc}''',  also occasionally referred to as " +
+			"'''[[]]''' and '''[[]]''' is a {objec} located in the " +
+			"constellation of {const_name} at an aproximate distance of {distance}[light-year|ly]. " +
+			"NGC {ngc} was discovered in {discovery[1]} by {discovery[0]}.\n").format(ngc=ngc_num, objec=objec,
+			const_name=basicInfo.getConstellation(), discovery=basicInfo.getDiscovererAndYear(ngc_num),
+			distance=basicInfo.getDistance())
 		return text
 
 

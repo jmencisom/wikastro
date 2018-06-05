@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+import sys
+sys.path.append('..')
 import re
 import unittest
 from BasicInfo import BasicInfo
@@ -106,6 +107,15 @@ class TestUM(unittest.TestCase):
 			print()		
 			output2 ="\nThe object was not found in database.\n"
 			self.assertEqual("\nThe object was not found in database.\n",output2)
+		
+
+	def test_positivo(self):
+		print("\nSearching object in database...\n")
+		ngc = "NGC"
+		ngc_num = 1
+		self.assertGreater(ngc_num,0)
+
+	
 		
 if __name__ == '__main__':
 	unittest.main()

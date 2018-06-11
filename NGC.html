@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module NGC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>NGC</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Candreslinares%5Cdesktop%5Cngc_virtual%5Cwikastro%5Cngc.py">c:\users\andreslinares\desktop\ngc_virtual\wikastro\ngc.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="urllib.request.html">urllib.request</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-askObjectNumber"><strong>askObjectNumber</strong></a>() -&gt; int</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-13<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;None.<br>
+Returns:&nbsp;Integer&nbsp;greater&nbsp;than&nbsp;zero.<br>
+Description:&nbsp;Request&nbsp;an&nbsp;input&nbsp;that&nbsp;must&nbsp;be&nbsp;a&nbsp;positive&nbsp;number&nbsp;greater&nbsp;than&nbsp;zero.</tt></dd></dl>
+ <dl><dt><a name="-deleteFontTags"><strong>deleteFontTags</strong></a>(soup)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;BeautifulSoup&nbsp;object.<br>
+Returns:&nbsp;BeautifulSoup&nbsp;object&nbsp;without&nbsp;&lt;font&nbsp;size="-1"&gt;&nbsp;&lt;/font&gt;tags.<br>
+Description:&nbsp;removes&nbsp;every&nbsp;single&nbsp;font&nbsp;tag&nbsp;with&nbsp;size&nbsp;-1&nbsp;in&nbsp;the&nbsp;object&nbsp;passed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;parameter.</tt></dd></dl>
+ <dl><dt><a name="-generateExtraInfo"><strong>generateExtraInfo</strong></a>(ngc_num:str, webpage:str) -&gt; str</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares<br>
+&nbsp;<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;number&nbsp;of&nbsp;NGC&nbsp;object&nbsp;and&nbsp;url.<br>
+Returns:&nbsp;String&nbsp;with&nbsp;external&nbsp;links&nbsp;for&nbsp;wikipedia.<br>
+Description:&nbsp;generates&nbsp;external&nbsp;links&nbsp;section.</tt></dd></dl>
+ <dl><dt><a name="-getAM_B"><strong>getAM_B</strong></a>(basicInfoTextSeparated)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;Text&nbsp;that&nbsp;contains&nbsp;basic&nbsp;info&nbsp;about&nbsp;NGC&nbsp;object&nbsp;and&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;by&nbsp;lines.<br>
+Returns:&nbsp;String<br>
+Description:&nbsp;finds&nbsp;the&nbsp;apparent&nbsp;magnitud&nbsp;B.</tt></dd></dl>
+ <dl><dt><a name="-getCoordinates"><strong>getCoordinates</strong></a>(basicInfoTextSeparated)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;Text&nbsp;that&nbsp;contains&nbsp;basic&nbsp;info&nbsp;about&nbsp;NGC&nbsp;object&nbsp;and&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;by&nbsp;lines.<br>
+Returns:&nbsp;String.<br>
+Description:&nbsp;finds&nbsp;the&nbsp;coordinates.</tt></dd></dl>
+ <dl><dt><a name="-getEpoch"><strong>getEpoch</strong></a>(basicInfoTextSeparated)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;Text&nbsp;that&nbsp;contains&nbsp;basic&nbsp;info&nbsp;about&nbsp;NGC&nbsp;object&nbsp;and&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;by&nbsp;lines.<br>
+Returns:&nbsp;String.<br>
+Description:&nbsp;finds&nbsp;the&nbsp;epoch.</tt></dd></dl>
+ <dl><dt><a name="-getHelioRadialVelocity"><strong>getHelioRadialVelocity</strong></a>(basicInfoTextSeparated)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;Text&nbsp;that&nbsp;contains&nbsp;basic&nbsp;info&nbsp;about&nbsp;NGC&nbsp;object&nbsp;and&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;by&nbsp;lines.<br>
+Returns:&nbsp;String.<br>
+Description:&nbsp;finds&nbsp;the&nbsp;helio&nbsp;radial&nbsp;velocity.</tt></dd></dl>
+ <dl><dt><a name="-getMeaningValues"><strong>getMeaningValues</strong></a>(soup)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;BeautifulSoup&nbsp;object<br>
+Returns:&nbsp;String&nbsp;that&nbsp;contains&nbsp;all&nbsp;the&nbsp;meaning&nbsp;data&nbsp;(basic&nbsp;info&nbsp;in&nbsp;simbad<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database).<br>
+Description:&nbsp;Using&nbsp;get_text()&nbsp;method&nbsp;from&nbsp;BeautifulSoup&nbsp;you&nbsp;get&nbsp;a&nbsp;lot&nbsp;of&nbsp;spaces<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;new&nbsp;line&nbsp;characters,&nbsp;then&nbsp;is&nbsp;required&nbsp;to&nbsp;get&nbsp;rid&nbsp;of&nbsp;them&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ease&nbsp;the&nbsp;obtaining&nbsp;labor&nbsp;later.&nbsp;&nbsp;The&nbsp;string&nbsp;ends&nbsp;when&nbsp;it&nbsp;finds&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'SIMBAD'&nbsp;word&nbsp;in&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-getMorphType"><strong>getMorphType</strong></a>(basicInfoTextSeparated)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;Text&nbsp;that&nbsp;contains&nbsp;basic&nbsp;info&nbsp;about&nbsp;NGC&nbsp;object&nbsp;and&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;by&nbsp;lines.<br>
+Returns:&nbsp;String.<br>
+Description:&nbsp;finds&nbsp;the&nbsp;morphological&nbsp;type.</tt></dd></dl>
+ <dl><dt><a name="-getOrganizatedData"><strong>getOrganizatedData</strong></a>(basicInfoText)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;String&nbsp;that&nbsp;contains&nbsp;basic&nbsp;info&nbsp;about&nbsp;NGC&nbsp;object<br>
+Returns:&nbsp;String&nbsp;array.<br>
+Description:&nbsp;This&nbsp;method&nbsp;will&nbsp;try&nbsp;to&nbsp;obtain&nbsp;information&nbsp;such&nbsp;as:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;type&nbsp;(obj_typ):&nbsp;Galaxy&nbsp;(g)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Epoch&nbsp;(epoch):&nbsp;J200...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coordinates&nbsp;(cood):&nbsp;xx&nbsp;xx&nbsp;xx.xxxx&nbsp;xx&nbsp;xx&nbsp;xx.xxxx<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helio&nbsp;Radial&nbsp;Velocity&nbsp;(hrv):&nbsp;xxxx.xx<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Red&nbsp;Shift&nbsp;(rs):&nbsp;x.xxxxx<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Morphological&nbsp;type&nbsp;(morp_typ):&nbsp;Sabc...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apparent&nbsp;magnitude&nbsp;B&nbsp;(b):&nbsp;xx.xxx</tt></dd></dl>
+ <dl><dt><a name="-getRedShift"><strong>getRedShift</strong></a>(basicInfoTextSeparated)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;Text&nbsp;that&nbsp;contains&nbsp;basic&nbsp;info&nbsp;about&nbsp;NGC&nbsp;object&nbsp;and&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;by&nbsp;lines.<br>
+Returns:&nbsp;String.<br>
+Description:&nbsp;finds&nbsp;the&nbsp;red&nbsp;shift.</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt></dl>
+ <dl><dt><a name="-obtainPage"><strong>obtainPage</strong></a>(ngc_num)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-13<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;Integer&nbsp;encapsulated&nbsp;as&nbsp;a&nbsp;string.<br>
+Returns:&nbsp;BeautifulSoup&nbsp;object&nbsp;encoded&nbsp;in&nbsp;'lxml'<br>
+Description:&nbsp;Search&nbsp;a&nbsp;NGC&nbsp;object&nbsp;in&nbsp;simbad&nbsp;database&nbsp;and&nbsp;then&nbsp;returns&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query&nbsp;in&nbsp;its&nbsp;full&nbsp;html&nbsp;page.&nbsp;&nbsp;The&nbsp;search&nbsp;could&nbsp;be&nbsp;empty.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;method&nbsp;uses&nbsp;urllib.request&nbsp;library.</tt></dd></dl>
+ <dl><dt><a name="-transformToCoordinatesWiki"><strong>transformToCoordinatesWiki</strong></a>(coordinates)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-13<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;String&nbsp;array&nbsp;that&nbsp;contains&nbsp;right&nbsp;ascension&nbsp;in&nbsp;first&nbsp;three&nbsp;positions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;declination&nbsp;in&nbsp;last&nbsp;three.<br>
+Returns:&nbsp;String&nbsp;to&nbsp;inject&nbsp;into&nbsp;wikipedia.<br>
+Description:&nbsp;Using&nbsp;the&nbsp;SKY_TEMPLATE&nbsp;found&nbsp;in&nbsp;wikipedia,&nbsp;the&nbsp;values&nbsp;are&nbsp;placed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;just&nbsp;like&nbsp;the&nbsp;example.&nbsp;&nbsp;Last&nbsp;value&nbsp;indicates&nbsp;the&nbsp;distance&nbsp;in&nbsp;light<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;years&nbsp;(not&nbsp;implemented&nbsp;yet).<br>
+Example:&nbsp;{{Sky|00|07|15.86||27|42|29.7|190000000}}</tt></dd></dl>
+ <dl><dt><a name="-transformToWikiBox"><strong>transformToWikiBox</strong></a>(ngc_num, epoch, coordinates, redShift, helioRadialVelocity, morphType, b, webpage)</dt><dd><tt>Author:&nbsp;Andres&nbsp;Linares.<br>
+Date:&nbsp;2018-02-14<br>
+Modified:&nbsp;Never.<br>
+Parameters:&nbsp;number&nbsp;of&nbsp;NGC&nbsp;object,&nbsp;epoch,&nbsp;coordinates&nbsp;as&nbsp;an&nbsp;array,&nbsp;hrv,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;morphtype,&nbsp;apparent&nbsp;magnitude&nbsp;b,&nbsp;url<br>
+Returns:&nbsp;String&nbsp;to&nbsp;paste&nbsp;into&nbsp;wikipedia.<br>
+Description:&nbsp;This&nbsp;method&nbsp;creates&nbsp;a&nbsp;simple&nbsp;wikibox&nbsp;using&nbsp;the&nbsp;Infobox&nbsp;galaxy<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template.</tt></dd></dl>
+</td></tr></table>
+</body></html>

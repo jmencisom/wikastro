@@ -10,8 +10,10 @@ Welcome to wikastro's documentation!
    :maxdepth: 2
    :caption: Contents:
 	ObtainInfo.rst
+    clfs.rst
     BasicInfo.rst
-    WikiGeneration.rst
+    WikiGeneration.rst 
+    Wikastro.rst
     NGC.rst
     Image_NGC.rst
 

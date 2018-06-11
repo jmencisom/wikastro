@@ -106,7 +106,27 @@ class WikiGeneration:
 		objec = text
 		text = ("\n==See also==\n*[[{text}]]\n").format(text = text )
 
-		return text,objec
+		return text, objec
+
+
+	def generateAbstract(self, ngc_num, basicInfo, objec):
+		text = ("\n'''NGC {ngc}''',  also occasionally referred to as " +
+			"'''[[]]''' and '''[[]]''' is a {objec} located in the " +
+			"constellation of {const_name} at an aproximate distance of {distance}[light-year|ly]. " +
+			"NGC {ngc} was discovered in {discovery[1]} by {discovery[0]}.\n").format(ngc=ngc_num, objec=objec,
+			const_name=basicInfo.getConstellation(), discovery=basicInfo.getDiscovererAndYear(ngc_num),
+			distance=basicInfo.getDistance())
+		return text
+
+
+	def generateObservation(self):
+		text = "\n== Observation ==\n"
+		return text
+
+
+	def generateStructure(self):
+		text = "\n== Structure ==\n"
+		return text
 
 
 	def __obtainReference(self, ngc_num, webpage):

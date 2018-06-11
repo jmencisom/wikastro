@@ -34,6 +34,7 @@ def main():
 		imageName = image.getImage()
 		imageCaption = image.getCaption(ngc_nomb)
 
+
 		wikiGeneration = WikiGeneration()
 		coordinatesTextWiki = wikiGeneration.transformToCoordinatesWiki(
 			basicInfo.getCoordinates())
@@ -41,10 +42,17 @@ def main():
 			basicInfo.getObjectType())
 		wikibox = wikiGeneration.transformToWikiBox(ngc_num, basicInfo, webpage,
 		 	imageName, imageCaption)
+
 		extraText = wikiGeneration.generateExtraInfo(ngc_num, webpage, objec)
+		abstract = wikiGeneration.generateAbstract(ngc_num, basicInfo, objec)
+		observation = wikiGeneration.generateObservation()
+		structure = wikiGeneration.generateStructure()
 
 		print(coordinatesTextWiki)
 		print(wikibox)
+		print(abstract)
+		print(observation)
+		print(structure)
 		print(fatherPageTextWiki)
 		print(extraText)
 	except IOError as err:
@@ -73,8 +81,3 @@ def askObjectNumber():
 				print("Input must be positive and greater than zero.\n")
 		except (ValueError, NameError, SyntaxError):
 			print("Input must be a number.\n")
-
-
-
-if __name__ == "__main__":
-	main()

@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/jmencisom/wikastro.svg?branch=master)](https://travis-ci.org/jmencisom/wikastro)
+[![Coverage Status](https://coveralls.io/repos/github/jmencisom/wikastro/badge.svg?branch=master)](https://coveralls.io/github/jmencisom/wikastro?branch=master)
 [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/)
 
 # WIKASTRO

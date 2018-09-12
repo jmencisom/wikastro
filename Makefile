@@ -15,7 +15,8 @@ help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 run:
-	python src/wikastro.py --ngc
+	cd src/ ; \
+	python wikastro.py --ngc
 
 .PHONY: help Makefile
 

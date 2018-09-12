@@ -20,8 +20,8 @@
 # -- Project information -----------------------------------------------------
 
 project = u'wikastro'
-copyright = u'2018, Wildimar Nieto'
-author = u'Wildimar Nieto'
+copyright = u'2018, Wikastro Team'
+author = u'Wikastro Team'
 
 # The short X.Y version
 version = u''
@@ -56,8 +56,8 @@ templates_path = ['ytemplates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
+
 
 # The master toctree document.
 master_doc = 'index'

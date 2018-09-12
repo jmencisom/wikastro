@@ -1,3 +1,11 @@
+# NGC
+
+## Methods
+
+## Attributes
+
+
+```
 # -*- coding: utf-8 -*-
 
 import re
@@ -81,3 +89,4 @@ def askObjectNumber():
 				print("Input must be positive and greater than zero.\n")
 		except (ValueError, NameError, SyntaxError):
 			print("Input must be a number.\n")
+```

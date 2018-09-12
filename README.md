@@ -12,6 +12,7 @@ Wikastro enriches the information on astronomical objects available at the free 
 * Python 2.7.14
 * pip
 * virtualenv (optional)
+* Make
 
 ### Installing
 
